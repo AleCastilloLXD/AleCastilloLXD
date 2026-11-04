@@ -23,7 +23,7 @@ export const Section: React.FC<SectionProps> = ({ id, children, className = "", 
           >
             {title && (
               <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-white">
-                {title} <span className="text-teal-400">.</span>
+                {title}<span className="text-teal-400" aria-hidden="true">.</span>
               </h2>
             )}
             {subtitle && (
@@ -31,7 +31,7 @@ export const Section: React.FC<SectionProps> = ({ id, children, className = "", 
                 {subtitle}
               </p>
             )}
-            <div className="h-1 w-20 bg-teal-500 mt-6 rounded-full opacity-80"></div>
+            <div aria-hidden="true" className="h-1 w-20 bg-teal-500 mt-6 rounded-full opacity-80"></div>
           </motion.div>
         )}
         {children}

@@ -23,12 +23,15 @@ export interface Project {
   year: string;
   description: string;
   image: string;
+  imageAlt: string;
   // Detail View Fields
   role: string;
   timeline: string;
   tools: string[];
   overview: string;
   challenges: ProjectChallenge[];
+  solution?: string;
+  outcome?: string;
   detailImages: string[];
 }
 
@@ -43,6 +46,6 @@ export interface ExperienceCard {
 export interface ContactInfo {
   email: string;
   linkedin: string;
-  github: string;
   location: string;
+  cv: string;
 }

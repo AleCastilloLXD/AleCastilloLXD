@@ -8,8 +8,8 @@ export const Experience: React.FC = () => {
   return (
     <Section 
       id="experience" 
-      title="Elevate Your Learning Experiences" 
-      subtitle="Transforming Complex Knowledge into Engaging, High-Impact Learning Solutions."
+      title="My Approach" 
+      subtitle="Turning complex products and processes into learning that changes what people do."
     >
       {/* Intro Text */}
       <motion.div 
@@ -20,7 +20,7 @@ export const Experience: React.FC = () => {
       >
         <div className="pl-6 border-l-2 border-teal-500">
           <p className="text-xl text-slate-300 leading-relaxed italic">
-            "I'm a Learning Experience & Instructional Design Lead with 10+ years of expertise, dedicated to building innovative educational journeys that drive measurable results."
+            "I'm a Learning Experience Designer with 15+ years in e-learning and 7+ years leading enterprise instructional design and GTM enablement for SaaS companies."
           </p>
         </div>
       </motion.div>
@@ -39,7 +39,7 @@ export const Experience: React.FC = () => {
             {/* Header */}
             <div className="p-8 pb-4">
               <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-slate-700/50">
-                <card.icon className="text-teal-400" size={24} />
+                <card.icon className="text-teal-400" size={24} aria-hidden="true" />
               </div>
               <h3 className="text-xl font-bold text-white leading-snug min-h-[3.5rem] mb-2">
                 {card.title}
@@ -52,9 +52,9 @@ export const Experience: React.FC = () => {
               {/* Problem */}
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Problem</span>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Problem</span>
                 </div>
-                <p className="text-slate-400 text-sm leading-relaxed border-l-2 border-slate-800 pl-3">
+                <p className="text-slate-300 text-sm leading-relaxed border-l-2 border-slate-800 pl-3">
                   {card.problem}
                 </p>
               </div>
@@ -73,8 +73,8 @@ export const Experience: React.FC = () => {
             {/* Benefit Footer */}
             <div className="bg-slate-950/50 p-6 border-t border-slate-800">
               <div className="flex items-center gap-2 mb-2 text-teal-400">
-                <CheckCircle2 size={16} />
-                <span className="text-xs font-bold uppercase tracking-wider">Your Benefit</span>
+                <CheckCircle2 size={16} aria-hidden="true" />
+                <span className="text-xs font-bold uppercase tracking-wider">Impact</span>
               </div>
               <p className="text-white text-sm font-medium leading-relaxed">
                 {card.benefit}

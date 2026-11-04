@@ -1,20 +1,18 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Alejandra Castillo — Portfolio
 
-# Run and deploy your AI Studio app
+Portfolio of Alejandra Castillo, Senior Instructional Designer and Learning Experience Designer for sales and GTM enablement.
 
-This contains everything you need to run your app locally.
+Live site: https://ale-castillo-lxd-6lma.vercel.app/
 
-View your app in AI Studio: https://ai.studio/apps/drive/15XGQrWpzL6VOgpGSTThr-HseE4k9yd6_
+Built with React, Vite, Tailwind CSS and Framer Motion.
 
-## Run Locally
+## Run locally
 
-**Prerequisites:**  Node.js
+```
+npm install
+npm run dev
+```
 
+## Edit content
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Projects, approach cards and contact details live in `constants.tsx`. Static files (CV, images, favicon) live in `public/`.

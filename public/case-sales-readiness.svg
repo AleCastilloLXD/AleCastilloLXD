@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="t d">
+<title id="t">Sales Readiness Program</title><desc id="d">Five steps: diagnose with Gong call simulations, find the consultative selling gap, build onboarding and job aids, practice in MindTickle, close more deals.</desc>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#020617"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#g)"/>
+<circle cx="1450" cy="120" r="260" fill="#14b8a6" opacity="0.08"/><circle cx="150" cy="820" r="220" fill="#2563eb" opacity="0.08"/>
+<text x="800" y="170" text-anchor="middle" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="28" font-weight="600" fill="#2dd4bf" letter-spacing="6">SALES ENABLEMENT CASE STUDY</text>
+<text x="800" y="245" text-anchor="middle" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="58" font-weight="700" fill="#f8fafc">From booked calls to closed deals</text>
+<rect x="95" y="380" width="250" height="300" rx="24" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+<text x="125" y="450" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="700" fill="#2dd4bf">01</text>
+<text x="125" y="515" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="33" font-weight="700" fill="#f8fafc">Diagnose</text>
+<text x="125" y="580" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">Call simulation built</text>
+<text x="125" y="612" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">from real Gong calls</text>
+<path d="M351 530 l26 0 m-10 -10 l10 10 l-10 10" stroke="#2dd4bf" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="385" y="380" width="250" height="300" rx="24" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+<text x="415" y="450" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="700" fill="#2dd4bf">02</text>
+<text x="415" y="515" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="33" font-weight="700" fill="#f8fafc">Find the gap</text>
+<text x="415" y="580" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">Right need read,</text>
+<text x="415" y="612" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">wrong fix offered</text>
+<path d="M641 530 l26 0 m-10 -10 l10 10 l-10 10" stroke="#2dd4bf" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="675" y="380" width="250" height="300" rx="24" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+<text x="705" y="450" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="700" fill="#2dd4bf">03</text>
+<text x="705" y="515" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="33" font-weight="700" fill="#f8fafc">Build</text>
+<text x="705" y="580" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">Onboarding, refresher,</text>
+<text x="705" y="612" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">in-call job aids</text>
+<path d="M931 530 l26 0 m-10 -10 l10 10 l-10 10" stroke="#2dd4bf" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="965" y="380" width="250" height="300" rx="24" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+<text x="995" y="450" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="700" fill="#2dd4bf">04</text>
+<text x="995" y="515" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="33" font-weight="700" fill="#f8fafc">Practice</text>
+<text x="995" y="580" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">Sales simulations</text>
+<text x="995" y="612" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">in MindTickle</text>
+<path d="M1221 530 l26 0 m-10 -10 l10 10 l-10 10" stroke="#2dd4bf" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1255" y="380" width="250" height="300" rx="24" fill="#134e4a" stroke="#2dd4bf" stroke-width="2"/>
+<text x="1285" y="450" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="700" fill="#2dd4bf">05</text>
+<text x="1285" y="515" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="33" font-weight="700" fill="#f8fafc">Close</text>
+<text x="1285" y="580" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">Confident sellers,</text>
+<text x="1285" y="612" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="21" fill="#cbd5e1">more closed deals</text>
+<text x="800" y="780" text-anchor="middle" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="24" fill="#94a3b8">For AEs, BDRs, SDRs, SEs and CSMs · Sovos</text>
+</svg>

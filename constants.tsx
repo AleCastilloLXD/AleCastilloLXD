@@ -26,14 +26,14 @@ export const PROJECTS: Project[] = [
     id: 21,
     title: "Sales Readiness Program: From Calls to Closed Deals",
     category: "Sales Enablement",
-    year: "Sovos",
+    year: "Global SaaS company",
     description: "A diagnostic built from real Gong calls revealed why sellers weren't closing, and led to a new onboarding program and team-wide refresher.",
     image: "/case-sales-readiness.svg",
     imageAlt: "Diagram of the program: diagnose with Gong call simulations, find the gap, build onboarding and job aids, practice in MindTickle, close deals.",
     role: "Global Enablement Learning Experience Designer",
     timeline: "Diagnostic and rollout over several months",
     tools: ["Gong call recordings", "MindTickle", "Call simulations", "Job aids"],
-    overview: "Sellers were reaching prospects and booking calls, but they weren't closing deals. Instead of guessing, we built a diagnostic first: a short course that put sellers through a simulated sales call, modeled on real Gong recordings.",
+    overview: "At a global tax compliance SaaS company, sellers were reaching prospects and booking calls, but they weren't closing deals. Instead of guessing, we built a diagnostic first: a short course that put sellers through a simulated sales call, modeled on real Gong recordings.",
     challenges: [
       {
         title: "The gap was consultative, not discovery",

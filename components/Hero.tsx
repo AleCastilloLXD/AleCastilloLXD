@@ -74,8 +74,10 @@ export const Hero: React.FC = () => {
               <div className="relative w-72 h-96 md:w-80 md:h-[450px] lg:w-[400px] lg:h-[500px] rounded-3xl border-4 border-slate-950 shadow-2xl overflow-hidden group">
                 <div aria-hidden="true" className="absolute inset-0 bg-teal-500/10 mix-blend-overlay group-hover:bg-transparent transition-all duration-500 z-10"></div>
                 <img
-                  src="https://i.imgur.com/L2EBBEp.jpeg"
+                  src="/alejandra-castillo.jpg"
                   alt="Portrait of Alejandra Castillo"
+                  width={800}
+                  height={1000}
                   className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
                 />
               </div>

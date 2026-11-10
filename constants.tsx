@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 3,
-    title: "Adolescent Neuroscience",
+    title: "Neuroscience for Social Work Practice",
     category: "Medical Education",
     year: "2023",
     description: "Scientific infographic series simplifying complex biological processes for social workers.",

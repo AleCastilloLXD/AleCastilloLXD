@@ -195,13 +195,43 @@ export const Portfolio: React.FC = () => {
                     </p>
                   </section>
 
+                  {selectedProject.link && (
+                    <section className="rounded-2xl border border-teal-400/40 bg-teal-400/5 p-6 md:p-8">
+                      <a
+                        href={selectedProject.link.href}
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                      >
+                        {selectedProject.link.label} <ArrowRight size={20} aria-hidden="true" />
+                      </a>
+                      {selectedProject.link.note && (
+                        <p className="mt-4 text-base text-slate-300 leading-relaxed">{selectedProject.link.note}</p>
+                      )}
+                    </section>
+                  )}
+
+                  {selectedProject.decisions && (
+                    <section>
+                      <p className="text-xs font-bold text-teal-400 uppercase tracking-wider mb-3">{selectedProject.decisions.eyebrow}</p>
+                      <h2 className="text-2xl font-bold text-white mb-8">{selectedProject.decisions.heading}</h2>
+                      <ol className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {selectedProject.decisions.items.map((d, idx) => (
+                          <li key={idx} className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                            <span className="block font-mono text-sm text-teal-400 mb-3" aria-hidden="true">{String(idx + 1).padStart(2, '0')}</span>
+                            <h3 className="text-white font-bold mb-3">{d.title}</h3>
+                            <p className="text-slate-300 text-base leading-relaxed">{d.description}</p>
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  )}
+
                   <section>
                     <h2 className="text-2xl font-bold text-white mb-8">The Challenge</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {selectedProject.challenges.map((challenge, idx) => (
                         <div key={idx} className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
                           <h3 className="text-white font-bold mb-3">{challenge.title}</h3>
-                          <p className="text-slate-300 text-sm leading-relaxed">
+                          <p className="text-slate-300 text-base leading-relaxed">
                             {challenge.description}
                           </p>
                         </div>
@@ -227,18 +257,44 @@ export const Portfolio: React.FC = () => {
                     </section>
                   )}
 
+                  {selectedProject.accessibility && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-white mb-8">Accessibility testing</h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                          <h3 className="text-white font-bold mb-4">Completed</h3>
+                          <ul className="space-y-3 list-disc pl-5 text-slate-300 text-base leading-relaxed">
+                            {selectedProject.accessibility.done.map(item => <li key={item}>{item}</li>)}
+                          </ul>
+                        </div>
+                        <div className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                          <h3 className="text-white font-bold mb-4">Next</h3>
+                          <ul className="space-y-3 list-disc pl-5 text-slate-300 text-base leading-relaxed">
+                            {selectedProject.accessibility.next.map(item => <li key={item}>{item}</li>)}
+                          </ul>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
                   {selectedProject.detailImages.length > 0 && (
                     <section>
                       <h2 className="text-2xl font-bold text-white mb-8">Visual Design</h2>
                       <div className="grid grid-cols-1 gap-8">
                         {selectedProject.detailImages.map((img, idx) => (
                           <figure key={idx} className="bg-slate-900 p-2 md:p-4 rounded-2xl border border-slate-800">
-                            <img
-                              src={img}
-                              alt={`${selectedProject.title}: design detail ${idx + 1}`}
-                              className="w-full h-auto rounded-lg"
-                              loading="lazy"
-                            />
+                            <a href={img} target="_blank" rel="noopener noreferrer" className="block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400">
+                              <img
+                                src={img}
+                                alt={selectedProject.detailCaptions?.[idx] ?? `${selectedProject.title}: design detail ${idx + 1}`}
+                                className="w-full h-auto rounded-lg"
+                                loading="lazy"
+                              />
+                              <span className="sr-only"> (opens full size in a new tab)</span>
+                            </a>
+                            {selectedProject.detailCaptions?.[idx] && (
+                              <figcaption className="mt-3 px-1 text-base text-slate-300 leading-relaxed">{selectedProject.detailCaptions[idx]}</figcaption>
+                            )}
                           </figure>
                         ))}
                       </div>

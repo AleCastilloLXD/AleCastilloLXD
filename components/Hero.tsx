@@ -27,13 +27,16 @@ export const Hero: React.FC = () => {
 
             <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight mb-8">
               Alejandra Castillo <br />
-              <span className="text-slate-300 text-3xl md:text-4xl font-semibold">Senior Instructional Designer for Sales &amp; GTM Enablement</span>
+              <span className="text-slate-300 text-3xl md:text-4xl font-semibold">Senior Learning Experience Designer</span>
             </h1>
 
+            <p className="text-teal-400 text-lg md:text-xl font-medium -mt-4 mb-8">
+              Sales Enablement · Customer Education · AI-Powered Learning
+            </p>
+
             <p className="text-xl text-slate-300 leading-relaxed mb-10">
-              I design sales and GTM enablement that helps revenue teams sell complex SaaS with confidence:
-              AI-accelerated, accessible by default, and measured by what sellers do differently.
-              15+ years in e-learning, most recently at SailPoint and Sovos.
+              I turn complex knowledge into practical learning experiences that help people make better decisions,
+              build confidence, and perform at their best.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
@@ -89,3 +92,4 @@ export const Hero: React.FC = () => {
     </section>
   );
 };
+

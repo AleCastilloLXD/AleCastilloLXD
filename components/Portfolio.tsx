@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Section } from './Section';
 import { PROJECTS } from '../constants';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Calendar, Wrench, User } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, Wrench, User } from 'lucide-react';
 
 const imgFit = (src: string) => (src.endsWith('.svg') ? 'object-contain' : 'object-cover');
 
@@ -129,6 +129,15 @@ export const Portfolio: React.FC = () => {
               >
                 {selectedProject.title}
               </motion.h1>
+
+              {selectedProject.link && (
+                <a
+                  href={selectedProject.link.href}
+                  className="inline-flex items-center gap-2 px-8 py-4 -mt-4 mb-12 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  {selectedProject.link.label} <ArrowRight size={20} aria-hidden="true" />
+                </a>
+              )}
 
               {/* Hero Image */}
               <motion.div

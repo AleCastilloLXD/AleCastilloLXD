@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Discovery Lab | A discovery simulation by Alejandra Castillo</title>
+<meta name="description" content="A branching, bilingual discovery-call simulation for B2B SaaS sellers. Fictional portfolio case designed by Alejandra Castillo, Senior Learning Experience Designer." />
+<meta property="og:title" content="The Discovery Lab | Alejandra Castillo" />
+<meta property="og:description" content="Discover what really matters: a branching discovery-call simulation for B2B SaaS sellers." />
+<meta name="theme-color" content="#10162B" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --navy:#10162B; --purple:#6251B5; --purple-dark:#4E3F99; --mint:#67DED2; --lavender:#E9E3FF;
+  --cloud:#F7F8FC; --teal:#006E72; --ink:#17213A; --ink-2:#53627B; --line:#DCE0EC; --white:#FFFFFF;
+  --radius:18px; --shadow:0 6px 24px rgba(16,22,43,.08);
+  --f-head:"Manrope",system-ui,sans-serif; --f-body:"Inter",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--f-body);font-size:17px;line-height:1.6;color:var(--ink);background:var(--cloud);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-head);color:var(--ink);margin:0}
+p{margin:0}
+button{font:inherit;color:inherit}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:16px;top:-60px;z-index:100;background:var(--navy);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
+.dark :focus-visible{outline-color:var(--mint)}
+.mono{font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 28px;border-radius:999px;border:2px solid transparent;font-weight:600;font-size:16px;cursor:pointer;text-decoration:none;transition:transform .15s ease,background-color .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-mint{background:var(--mint);color:var(--navy)}
+.btn-mint:hover{background:#86E6DC;box-shadow:0 8px 24px rgba(103,222,210,.35)}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-purple:hover{background:var(--purple-dark)}
+.btn-ghost{background:transparent;color:var(--purple);border-color:var(--purple)}
+.btn-ghost:hover{background:var(--lavender)}
+.btn svg{width:20px;height:20px}
+
+/* ---------- Language toggle ---------- */
+.lang{display:inline-flex;border-radius:999px;padding:3px;background:var(--lavender);gap:2px}
+.lang button{min-width:44px;min-height:36px;border:0;border-radius:999px;background:transparent;font-family:var(--f-mono);font-size:13px;font-weight:500;letter-spacing:.06em;cursor:pointer;color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--purple);color:#fff}
+.dark .lang{background:rgba(255,255,255,.1)}
+.dark .lang button{color:#fff}
+.dark .lang button[aria-pressed="true"]{background:var(--mint);color:var(--navy)}
+
+/* ---------- Cover ---------- */
+.cover{min-height:100vh;background:var(--navy);color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.cover::before,.cover::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.cover::before{width:520px;height:520px;background:rgba(98,81,181,.45);top:-160px;right:-120px}
+.cover::after{width:380px;height:380px;background:rgba(103,222,210,.18);bottom:-140px;left:-80px}
+.cover-top{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;padding:24px clamp(20px,5vw,64px)}
+.cover-brand{font-family:var(--f-head);font-weight:700;font-size:16px;color:#fff;text-decoration:none}
+.cover-brand span{color:var(--mint)}
+.cover-main{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:24px clamp(20px,5vw,64px) 48px;max-width:1280px;margin:0 auto;width:100%}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(103,222,210,.14);color:var(--mint);border:1px solid rgba(103,222,210,.35)}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--mint)}
+.cover h1{color:#fff;font-size:clamp(40px,6vw,64px);font-weight:800;line-height:1.04;letter-spacing:-.02em;margin:22px 0 14px}
+.cover .sub{font-family:var(--f-head);font-weight:700;font-size:clamp(22px,2.6vw,28px);color:var(--mint);margin-bottom:18px}
+.cover .body{font-size:19px;color:#D5DAE8;max-width:34ch;margin-bottom:32px}
+.cover .meta{margin-top:22px;font-size:14px;color:#B7BFD4;display:flex;flex-wrap:wrap;gap:6px 14px}
+.cover-foot{position:relative;z-index:1;padding:20px clamp(20px,5vw,64px);font-size:14px;color:#B7BFD4;border-top:1px solid rgba(255,255,255,.08)}
+.cover-foot a{color:var(--mint)}
+.cover-art svg{width:100%;height:auto;max-width:560px;display:block;margin-left:auto}
+
+/* ---------- App shell ---------- */
+.app-header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.app-header-inner{max-width:1240px;margin:0 auto;padding:10px clamp(16px,3vw,32px);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.app-brand{font-family:var(--f-head);font-weight:800;font-size:17px;color:var(--navy);margin-right:auto;text-decoration:none}
+.app-brand span{color:var(--purple)}
+.progress{flex-basis:100%;order:3;display:flex;flex-direction:column;gap:6px;padding-bottom:4px}
+.progress-label{color:var(--ink-2)}
+.progress-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.progress-bar span{height:6px;border-radius:999px;background:var(--line)}
+.progress-bar span.done{background:var(--purple)}
+.progress-bar span.now{background:var(--mint);box-shadow:inset 0 0 0 1px var(--teal)}
+.hdr-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.switch{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:4px 12px 4px 6px;border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:var(--ink)}
+.switch .track{width:38px;height:22px;border-radius:999px;background:#B9C0D3;position:relative;transition:background .2s}
+.switch .track::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
+.switch[aria-checked="true"] .track{background:var(--purple)}
+.switch[aria-checked="true"] .track::after{transform:translateX(16px)}
+.icon-btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border:1px solid var(--line);background:#fff;border-radius:999px;cursor:pointer;font-size:14px;font-weight:600;color:var(--ink)}
+.icon-btn svg{width:18px;height:18px}
+
+main.stage{max-width:1240px;margin:0 auto;padding:28px clamp(16px,3vw,32px) 64px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
+main.stage.single{grid-template-columns:minmax(0,1fr)}
+.col{min-width:0;display:flex;flex-direction:column;gap:22px}
+.scene-head{display:flex;flex-direction:column;gap:10px}
+.eyebrow{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#C9F3EE;color:var(--navy)}
+.scene-head h1{font-size:clamp(28px,3.4vw,36px);font-weight:700;line-height:1.15;letter-spacing:-.01em}
+.scene-head h1:focus{outline:none}
+.scene-head h1:focus-visible{outline:3px solid var(--purple);outline-offset:4px;border-radius:6px}
+.lead{color:var(--ink-2);font-size:17px;max-width:62ch}
+
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid #EDEFF5}
+.designer-note{border-radius:var(--radius);background:#fff;border:2px dashed var(--purple);padding:18px 20px;display:flex;gap:14px}
+.designer-note svg{flex:none;width:28px;height:28px;color:var(--purple)}
+.designer-note h2{font-size:16px;margin-bottom:4px;color:var(--purple)}
+.designer-note p{font-size:15px;color:var(--ink)}
+
+/* Briefing */
+.brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.prospect{padding:22px;display:flex;flex-direction:column;gap:14px;background:var(--navy);color:#fff;border:0}
+.prospect .who{display:flex;gap:14px;align-items:center}
+.avatar{flex:none;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--purple);font-family:var(--f-head);font-weight:800;font-size:18px;box-shadow:0 0 0 4px rgba(205,189,255,.45)}
+.prospect h2{color:#fff;font-size:22px}
+.prospect .role{color:#D5DAE8;font-size:15px}
+.prospect .co{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.07);font-size:15px;color:#E6E9F2}
+.prospect .co svg{flex:none;width:40px;height:40px}
+.info{padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.info h2{font-size:18px;display:flex;align-items:center;gap:10px}
+.info h2 .ic{width:34px;height:34px;border-radius:10px;background:var(--lavender);display:grid;place-items:center;color:var(--purple)}
+.info h2 .ic svg{width:18px;height:18px}
+.info p{color:var(--ink-2);font-size:16px}
+.objective{border-left:5px solid var(--teal)}
+
+/* Call card */
+.call{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:center;padding:14px;background:var(--navy);border-radius:var(--radius);color:#fff}
+.call .tile{border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#2A2F55}
+.call .tile svg{width:100%;height:100%;display:block}
+.call .live{display:inline-flex;align-items:center;gap:8px;color:var(--mint)}
+.call .live .dot{width:8px;height:8px;border-radius:50%;background:var(--mint);animation:pulse 1.6s infinite}
+.call h2{color:#fff;font-size:20px;margin:6px 0 2px}
+.call .role{color:#C9CFE0;font-size:15px}
+.mood{margin-top:10px;display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.1);font-size:14px;color:#fff}
+.mood b{font-weight:600;color:var(--mint)}
+
+/* Transcript */
+.transcript{display:flex;flex-direction:column;gap:14px;padding:22px;background:#fff}
+.transcript h2{font-size:15px}
+details.earlier{border-bottom:1px dashed var(--line);padding-bottom:10px}
+details.earlier summary{cursor:pointer;color:var(--purple);font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center}
+details.earlier .msgs{display:flex;flex-direction:column;gap:14px;padding-top:8px}
+.msg{display:flex;gap:12px;align-items:flex-end;max-width:88%}
+.msg .ava{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-head);font-weight:800;font-size:13px}
+.msg.morgan .ava{background:var(--lavender);color:var(--purple)}
+.msg.you{align-self:flex-end;flex-direction:row-reverse}
+.msg.you .ava{background:var(--purple);color:#fff}
+.bubble{padding:12px 16px;border-radius:18px;font-size:18px;line-height:1.6}
+.bubble .name{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
+.msg.morgan .bubble{background:var(--cloud);border:1px solid #E3E6F0;border-bottom-left-radius:6px}
+.msg.morgan .bubble .name{color:var(--teal)}
+.msg.you .bubble{background:var(--purple);color:#fff;border-bottom-right-radius:6px}
+.msg.you .bubble .name{color:#E9E3FF}
+.msg:focus{outline:none}
+.msg:focus-visible .bubble{outline:3px solid var(--purple);outline-offset:3px}
+.narr{align-self:center;text-align:center;font-size:15px;font-style:italic;color:var(--ink-2);max-width:56ch;padding:4px 12px}
+.msg.new,.narr.new{animation:rise .45s ease both}
+.msg.morgan.new{animation-delay:.35s}
+
+/* Choices */
+.choices{padding:22px;display:flex;flex-direction:column;gap:14px}
+.choices fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;min-width:0}
+.choices legend{font-family:var(--f-head);font-weight:700;font-size:20px;margin-bottom:4px;padding:0}
+.choices .hint{font-size:14px;color:var(--ink-2);font-weight:500}
+.opt{position:relative;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:16px;border:2px solid #E3E6F0;background:#fff;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
+.opt:hover{border-color:#B8ADEB;transform:translateY(-1px)}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt .oic{flex:none;width:44px;height:44px;border-radius:12px;background:var(--lavender);display:grid;place-items:center;color:var(--purple)}
+.opt .oic svg{width:22px;height:22px}
+.opt .txt{flex:1;font-size:17px}
+.opt .radio{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid #8C97AE;margin-top:10px;display:grid;place-items:center}
+.opt input:checked ~ .radio{border-color:var(--purple)}
+.opt input:checked ~ .radio::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--purple)}
+.opt:has(input:checked){border-color:var(--purple);box-shadow:0 0 0 4px rgba(98,81,181,.14)}
+.opt:has(input:focus-visible){outline:3px solid var(--purple);outline-offset:3px}
+.opt.chk .radio{border-radius:6px}
+.opt.chk input:checked ~ .radio::after{width:14px;height:8px;border-radius:0;background:transparent;border-left:3px solid var(--purple);border-bottom:3px solid var(--purple);transform:rotate(-45deg) translate(1px,-2px)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.err{color:#A3263A;font-weight:600;font-size:15px}
+
+/* Notes aside */
+.aside{position:sticky;top:120px;display:flex;flex-direction:column;gap:16px}
+.notes{background:var(--lavender);border-radius:var(--radius);padding:20px}
+.notes h2{display:flex;align-items:center;gap:10px;color:var(--purple);margin-bottom:12px}
+.notes h2 svg{width:20px;height:20px}
+.notes ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.notes li{background:#fff;border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.5;display:flex;gap:10px;border-left:4px solid var(--teal)}
+.notes li svg{flex:none;width:18px;height:18px;color:var(--teal);margin-top:2px}
+.notes li.new{animation:slide .5s ease both, glow 1.6s ease .5s 1}
+.notes .empty{font-size:15px;color:var(--ink-2)}
+.notes-mobile{display:none}
+
+/* Evidence board */
+.board-art{display:flex;gap:18px;align-items:center}
+.board-art svg{flex:none;width:150px;height:auto}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.legend div{background:#fff;border-radius:14px;padding:12px 14px;font-size:14px;border-top:4px solid}
+.legend b{display:block;font-size:15px}
+.legend .k{border-color:var(--teal)} .legend .a{border-color:var(--purple)} .legend .s{border-color:var(--ink-2)}
+.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ev{padding:18px;display:flex;flex-direction:column;gap:12px}
+.ev fieldset{border:0;padding:0;margin:0;min-width:0}
+.ev legend{font-size:17px;font-weight:600;color:var(--ink);padding:0;margin-bottom:12px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:999px;border:2px solid #D4D9E6;font-size:14px;font-weight:600;cursor:pointer;background:#fff}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label:has(input:checked){background:var(--purple);border-color:var(--purple);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--purple);outline-offset:3px}
+.seg label:has(input:disabled){cursor:default}
+.verdict{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:12px;font-size:15px;line-height:1.5}
+.verdict svg{flex:none;width:20px;height:20px;margin-top:2px}
+.verdict.ok{background:#E2F4F2;color:#00494C}
+.verdict.no{background:var(--lavender);color:#3B2F7A}
+.verdict b{display:block}
+.counter{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600}
+.counter b{display:grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:var(--purple);color:#fff;font-size:13px}
+.summary-line{padding:16px 18px;border-radius:14px;background:var(--navy);color:#fff;font-weight:600}
+
+/* Debrief */
+.debrief-hero{display:grid;grid-template-columns:1fr 220px;gap:20px;align-items:center;padding:26px;background:var(--navy);border-radius:var(--radius);color:#fff}
+.debrief-hero h1{color:#fff}
+.debrief-hero p{color:#D5DAE8}
+.debrief-hero svg{width:100%;height:auto}
+.path{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.path span{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);font-size:14px;color:#fff}
+.path span i{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--mint)}
+.dims{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dim{padding:22px;display:flex;flex-direction:column;gap:12px}
+.dim-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.dim h2{font-size:19px}
+.level{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:6px 12px;border-radius:999px}
+.level svg{width:18px;height:18px}
+.level.l2{background:#E2F4F2;color:#00494C}
+.level.l1{background:var(--lavender);color:#3B2F7A}
+.level.l0{background:#EEF0F5;color:#3D4A61}
+.meter{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.meter span{height:8px;border-radius:999px;background:#E3E6F0}
+.meter.l2 span{background:var(--teal)}
+.meter.l1 span:nth-child(-n+2){background:var(--purple)}
+.meter.l0 span:first-child{background:var(--ink-2)}
+.dim .ev-text{font-size:16px}
+.try{border-radius:12px;background:var(--cloud);padding:12px 14px;font-size:15px}
+.try b{display:block;color:var(--teal);font-size:13px;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.closing{text-align:center;padding:30px 22px;border-radius:var(--radius);background:var(--purple);color:#fff;display:flex;flex-direction:column;gap:18px;align-items:center}
+.closing p{font-family:var(--f-head);font-weight:700;font-size:clamp(20px,2.4vw,26px);max-width:30ch}
+.closing .btn-ghost{color:#fff;border-color:#fff}
+.closing .btn-ghost:hover{background:rgba(255,255,255,.12)}
+.disclaim{font-size:14px;color:var(--ink-2);text-align:center}
+.disclaim a{color:var(--purple)}
+
+dialog{border:0;border-radius:var(--radius);padding:26px;max-width:420px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(16,22,43,.3)}
+dialog::backdrop{background:rgba(16,22,43,.55)}
+dialog h2{font-size:20px;margin-bottom:8px}
+dialog p{color:var(--ink-2);margin-bottom:20px}
+
+.fade{animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes slide{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(103,222,210,.0)}40%{box-shadow:0 0 0 6px rgba(103,222,210,.55)}100%{box-shadow:0 0 0 0 rgba(103,222,210,0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.floaty{animation:float 5s ease-in-out infinite}
+.floaty.d2{animation-delay:-2.5s}
+
+@media (max-width:980px){
+  main.stage{grid-template-columns:minmax(0,1fr)}
+  .aside{display:none}
+  .notes-mobile{display:block}
+  .notes-mobile summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;min-height:48px;font-weight:600;color:var(--purple)}
+  .notes-mobile summary::-webkit-details-marker{display:none}
+  .cover-main{grid-template-columns:1fr}
+  .cover-art{order:-1}
+  .cover-art svg{max-width:420px;margin:0 auto}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .brief-grid,.ev-grid,.dims,.legend{grid-template-columns:1fr}
+  .call{grid-template-columns:120px 1fr;gap:12px}
+  .bubble{font-size:17px}
+  .msg{max-width:100%}
+  .debrief-hero{grid-template-columns:1fr}
+  .debrief-hero svg{max-width:180px}
+  .switch .lbl-long{display:none}
+  .board-art svg{width:96px}
+  .mood{font-size:13px;padding:4px 10px}
+  .call .tile{align-self:start}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div id="app"></div>
+
+<dialog id="restart-dlg" aria-labelledby="restart-title">
+  <h2 id="restart-title"></h2>
+  <p id="restart-body"></p>
+  <div class="actions">
+    <button type="button" class="btn btn-purple" id="restart-yes"></button>
+    <button type="button" class="btn btn-ghost" id="restart-no"></button>
+  </div>
+</dialog>
+
+<script>
+/* =========================================================
+   The Discovery Lab: content (EN source, ES localization)
+   Learning design & script: Alejandra Castillo
+   ========================================================= */
+const T = {
+en:{
+  docTitle:"The Discovery Lab | A discovery simulation by Alejandra Castillo",
+  brandA:"The Discovery", brandB:"Lab",
+  coverEyebrow:"A discovery simulation",
+  coverTitle:"The Discovery Lab",
+  coverSub:"Discover what really matters.",
+  coverBody:"Before you recommend a solution, find out what the customer is trying to accomplish.",
+  start:"Start the simulation",
+  meta:["8–10 min","6 scenes","Works with keyboard and screen readers"],
+  coverFoot:"Fictional scenario created for a learning design portfolio. Learning strategy, script and UX by Alejandra Castillo; prototype built with AI-assisted coding.",
+  backPortfolio:"Back to the portfolio",
+  skip:"Skip to the activity",
+  langGroup:"Language",
+  langNow:"Language changed to English.",
+  sceneNames:["Briefing","The request","Follow the signal","Evidence board","Next step","Debrief"],
+  micro:["Scene 00 · Briefing","Scene 01 · The request","Scene 02 · Follow the signal","Scene 03 · Evidence board","Scene 04 · Next step","Scene 05 · Debrief"],
+  progress:(n,name)=>`Scene ${n} of 5 · ${name}`,
+  notesToggle:"Designer's notes", notesHint:"See the reasoning behind each screen",
+  dnTitle:"Designer's note",
+  restart:"Restart", restartTitle:"Restart the call?", restartBody:"Your choices so far will be cleared.", restartYes:"Restart", restartNo:"Keep going",
+  respond:"Respond", cont:"Continue", chooseFirst:"Choose a response first.",
+  you:"You", morgan:"Morgan", narrLabel:"Narration",
+  onCall:"On call", moodLabel:"Morgan's mood:", moods:{engaged:"Engaged",neutral:"Neutral",guarded:"Guarded"},
+  transcript:"Conversation", earlier:n=>`Earlier in the call (${n} messages)`,
+  notesTitle:"Discovery Notes", notesEmpty:"No notes yet. Morgan's answers will appear here.", notesMobile:n=>`Discovery Notes (${n})`,
+  noteNew:"New discovery note: ", morganSays:"Morgan says: ", sceneAnn:(n,name)=>`Scene ${n}: ${name}`,
+  /* Scene 00 */
+  b_title:"Your next call: Northshore Services",
+  b_intro:"You're an Account Executive at Aster Analytics, a B2B SaaS company that helps operations teams turn data into decisions.",
+  b_role:"VP of Operations, Northshore Services", b_co:"Multi-location field service company",
+  b_knowT:"What you know", b_know:"Morgan filled out a web form: “Looking for better reporting dashboards.” This is your first call. You have 30 minutes.",
+  b_objT:"Your objective", b_obj:"Understand the business problem behind the request before you recommend anything.",
+  b_howT:"How it works", b_how:"You choose what to say. Morgan responds to what you ask, so different questions uncover different information. There's no timer, and you can replay at the end.",
+  b_join:"Join the call",
+  /* Scene 01 */
+  s1_title:"Morgan wants a demo.", s1_lead:"Listen to the request, then decide how to respond.",
+  s1_prompt:"How do you respond?", s1_hint:"Choose one response, then select Respond.",
+  s1_recA:"The demo is losing momentum. What do you do?", s1_recC:"Morgan sounds guarded. How do you repair the conversation?",
+  /* Scene 02 */
+  s2_title:"Follow the signal.", s2_lead:"Ask two follow-up questions, one at a time. Each answer shapes what you can ask next.",
+  s2_p1:"What do you ask next? You'll ask two questions.", s2_p2:"One more question. What else do you want to know?",
+  s2_hint1:"Question 1 of 2", s2_hint2:"Question 2 of 2",
+  /* Scene 03 */
+  s3_title:"What do you actually know?", s3_lead:"The call pauses. Before you decide on a next step, sort each card: is it something Morgan said, something you're assuming, or something you still need to find out?",
+  cat:{known:"Known",assumed:"Assumed",learn:"Still to learn"},
+  catDesc:{known:"Morgan said it",assumed:"Sounds likely, but unconfirmed",learn:"An open question"},
+  sorted:(n)=>`${n} of 7 sorted`, check:"Check my board", sortAll:"Sort all seven cards first.",
+  matches:"Matches the evidence", pointsTo:c=>`The evidence points to: ${c}`,
+  r_known:"Morgan said this directly.", r_likely:"It sounds likely, but Morgan never said it. You'd need to ask.",
+  r_budget:"Nobody mentioned budget. Treating it as a fact can lead to a proposal Morgan can't act on.",
+  r_solution:"This is the product's promise, not evidence. Morgan's problem is the process behind the reports.",
+  r_learn:"This is an open question, and a good one for your next conversation.",
+  boardSummary:n=>`You sorted ${n} of 7 the way the evidence supports.`,
+  boardAnn:n=>`Board checked. You sorted ${n} of 7 the way the evidence supports.`,
+  /* Scene 04 */
+  s4_title:"Choose the next step.", s4_lead:"Commit to a next step, then point to the notes that support it.",
+  s4_prompt:"Choose your next step.", s4_hint:"Choose one, then select Respond.",
+  s4_jPrompt:"Which of your Discovery Notes support this step?", s4_jHint:"Select up to two.",
+  s4_jNone:"You don't have confirmed notes yet. That's useful information too: it tells you what to ask next.",
+  s4_confirm:"Confirm my next step", s4_max:"You can select up to two notes.",
+  /* Scene 05 */
+  s5_title:"Your discovery debrief", s5_lead:"Here's how your decisions showed up in the conversation. This is a practice rubric, not a score or a certification.",
+  pathLabel:"Your path", levels:["Not yet","Emerging","Demonstrated"], tryNext:"Try next time", keepUsing:"Keep using",
+  replay:"Replay the conversation", backStart:"Back to the start",
+  closing:"Discovery isn't a script. It's how you earn the right to recommend.",
+  disclaim:"Fictional portfolio case. Performance impact has not been measured.",
+  dims:["Clarify the request","Investigate impact","Manage uncertainty","Next-step judgment"],
+  pathBoard:n=>`${n}/7 sorted`, pathQs:"Asked",
+},
+es:{
+  docTitle:"The Discovery Lab | Una simulación de descubrimiento de Alejandra Castillo",
+  brandA:"The Discovery", brandB:"Lab",
+  coverEyebrow:"Una simulación de descubrimiento",
+  coverTitle:"The Discovery Lab",
+  coverSub:"Descubre lo que realmente importa.",
+  coverBody:"Antes de recomendar una solución, descubre qué está intentando lograr el cliente.",
+  start:"Comenzar la simulación",
+  meta:["8–10 min","6 escenas","Compatible con teclado y lectores de pantalla"],
+  coverFoot:"Escenario ficticio creado para un portafolio de diseño de aprendizaje. Estrategia de aprendizaje, guion y UX de Alejandra Castillo; prototipo desarrollado con programación asistida por IA.",
+  backPortfolio:"Volver al portafolio",
+  skip:"Saltar a la actividad",
+  langGroup:"Idioma",
+  langNow:"Idioma cambiado a español.",
+  sceneNames:["Briefing","La solicitud","Sigue la señal","Tablero de evidencia","Siguiente paso","Debrief"],
+  micro:["Escena 00 · Briefing","Escena 01 · La solicitud","Escena 02 · Sigue la señal","Escena 03 · Tablero de evidencia","Escena 04 · Siguiente paso","Escena 05 · Debrief"],
+  progress:(n,name)=>`Escena ${n} de 5 · ${name}`,
+  notesToggle:"Notas de diseño", notesHint:"Ver el razonamiento detrás de cada pantalla",
+  dnTitle:"Nota de diseño",
+  restart:"Reiniciar", restartTitle:"¿Reiniciar la llamada?", restartBody:"Se borrarán tus decisiones hasta ahora.", restartYes:"Reiniciar", restartNo:"Seguir",
+  respond:"Responder", cont:"Continuar", chooseFirst:"Primero elige una respuesta.",
+  you:"Tú", morgan:"Morgan", narrLabel:"Narración",
+  onCall:"En llamada", moodLabel:"Ánimo de Morgan:", moods:{engaged:"Con interés",neutral:"Neutral",guarded:"A la defensiva"},
+  transcript:"Conversación", earlier:n=>`Antes en la llamada (${n} mensajes)`,
+  notesTitle:"Notas de descubrimiento", notesEmpty:"Aún no hay notas. Las respuestas de Morgan aparecerán aquí.", notesMobile:n=>`Notas de descubrimiento (${n})`,
+  noteNew:"Nueva nota de descubrimiento: ", morganSays:"Morgan dice: ", sceneAnn:(n,name)=>`Escena ${n}: ${name}`,
+  b_title:"Tu próxima llamada: Northshore Services",
+  b_intro:"Eres Account Executive en Aster Analytics, una empresa SaaS B2B que ayuda a los equipos de operaciones a convertir datos en decisiones.",
+  b_role:"VP de Operaciones, Northshore Services", b_co:"Empresa de servicios en campo con varias sedes",
+  b_knowT:"Lo que sabes", b_know:"Morgan llenó un formulario web: “Buscamos mejores dashboards de reportes”. Es tu primera llamada. Tienes 30 minutos.",
+  b_objT:"Tu objetivo", b_obj:"Entender el problema de negocio detrás de la solicitud antes de recomendar cualquier cosa.",
+  b_howT:"Cómo funciona", b_how:"Tú eliges qué decir. Morgan responde a lo que preguntas, así que cada pregunta revela información distinta. No hay temporizador y al final puedes repetir la llamada.",
+  b_join:"Unirse a la llamada",
+  s1_title:"Morgan quiere una demo.", s1_lead:"Escucha la solicitud y decide cómo responder.",
+  s1_prompt:"¿Cómo respondes?", s1_hint:"Elige una respuesta y selecciona Responder.",
+  s1_recA:"La demo está perdiendo fuerza. ¿Qué haces?", s1_recC:"Morgan suena a la defensiva. ¿Cómo recuperas la conversación?",
+  s2_title:"Sigue la señal.", s2_lead:"Haz dos preguntas de seguimiento, una a la vez. Cada respuesta define lo que puedes preguntar después.",
+  s2_p1:"¿Qué preguntas ahora? Harás dos preguntas.", s2_p2:"Una pregunta más. ¿Qué más quieres saber?",
+  s2_hint1:"Pregunta 1 de 2", s2_hint2:"Pregunta 2 de 2",
+  s3_title:"¿Qué sabes realmente?", s3_lead:"La llamada hace una pausa. Antes de decidir el siguiente paso, clasifica cada tarjeta: ¿es algo que Morgan dijo, algo que estás suponiendo o algo que todavía necesitas descubrir?",
+  cat:{known:"Confirmado",assumed:"Supuesto",learn:"Por descubrir"},
+  catDesc:{known:"Morgan lo dijo",assumed:"Suena probable, pero no está confirmado",learn:"Una pregunta abierta"},
+  sorted:(n)=>`${n} de 7 clasificadas`, check:"Revisar mi tablero", sortAll:"Primero clasifica las siete tarjetas.",
+  matches:"Coincide con la evidencia", pointsTo:c=>`La evidencia apunta a: ${c}`,
+  r_known:"Morgan lo dijo directamente.", r_likely:"Suena probable, pero Morgan nunca lo dijo. Tendrías que preguntarlo.",
+  r_budget:"Nadie mencionó presupuesto. Darlo por hecho puede llevar a una propuesta que Morgan no puede impulsar.",
+  r_solution:"Esto es la promesa del producto, no evidencia. El problema de Morgan es el proceso detrás de los reportes.",
+  r_learn:"Es una pregunta abierta, y una buena para tu próxima conversación.",
+  boardSummary:n=>`Clasificaste ${n} de 7 tarjetas según lo que respalda la evidencia.`,
+  boardAnn:n=>`Tablero revisado. Clasificaste ${n} de 7 según la evidencia.`,
+  s4_title:"Elige el siguiente paso.", s4_lead:"Comprométete con un siguiente paso y señala las notas que lo respaldan.",
+  s4_prompt:"Elige tu siguiente paso.", s4_hint:"Elige uno y selecciona Responder.",
+  s4_jPrompt:"¿Cuáles de tus Notas de descubrimiento respaldan este paso?", s4_jHint:"Selecciona hasta dos.",
+  s4_jNone:"Todavía no tienes notas confirmadas. Eso también es información útil: te dice qué preguntar después.",
+  s4_confirm:"Confirmar mi siguiente paso", s4_max:"Puedes seleccionar hasta dos notas.",
+  s5_title:"Tu debrief de descubrimiento", s5_lead:"Así se reflejaron tus decisiones en la conversación. Esta es una rúbrica de práctica, no una calificación ni una certificación.",
+  pathLabel:"Tu recorrido", levels:["Aún no","En desarrollo","Demostrado"], tryNext:"Prueba la próxima vez", keepUsing:"Sigue usando",
+  replay:"Repetir la conversación", backStart:"Volver al inicio",
+  closing:"El descubrimiento no es un guion. Es como te ganas el derecho a recomendar.",
+  disclaim:"Caso ficticio de portafolio. No se ha medido el impacto en el desempeño.",
+  dims:["Aclarar la solicitud","Investigar el impacto","Manejar la incertidumbre","Criterio para el siguiente paso"],
+  pathBoard:n=>`${n}/7 clasificadas`, pathQs:"Preguntaste",
+}};
+
+/* Dialogue lines */
+const L = {
+en:{
+  m_open:"Thanks for making time. We need a better reporting dashboard. Can you show us what your platform does?",
+  s1_A:"Absolutely. Our dashboards are fully customizable. Let me share my screen.",
+  s1_B:"Happy to. Before I show anything, what's happening with reporting today that you'd most like to change?",
+  s1_C:"Sure. First, what budget do you have, and who will sign the contract?",
+  m_pain:"Fair question. Every location tracks jobs in its own tool. Every Friday someone exports spreadsheets and stitches them together by hand.",
+  n_demo:"You share your screen and walk through the dashboard builder. Morgan nods, then goes quiet.",
+  m_demo:"It looks nice. Honestly, I'm not sure which of these views we'd actually use.",
+  m_guard:"We're a bit early for that. I don't even know yet if this is the right fit.",
+  r_A1:"Let me pause here. What would you most want a dashboard to help your team do?",
+  r_A2:"Let me jump to the executive view. It's our most popular one.",
+  r_C1:"Fair point, I jumped ahead. What's happening with reporting that made you reach out?",
+  r_C2:"No problem. Let me show you the platform, and we can talk numbers later.",
+  m_sure:"Sure.", m_okay:"Okay.", n_shortdemo:"You run a short demo of the platform.",
+  m_s2_known:"And by Monday, managers show up with different numbers. It's become a real headache.",
+  m_s2_hidden:"Anyway, reporting has been a headache for a while.",
+  q_PAIN:"You said reporting's been a headache. What makes it hard today?",
+  q_IMPACT:"What happens in your weekly reviews when those numbers don't match?",
+  q_STAKE:"Who uses these reports today, and what decisions depend on them?",
+  q_SUCCESS:"If reporting worked the way you want six months from now, what would be different?",
+  q_FEATURE:"Would you like to see our dashboard color and layout options?",
+  a_PAIN:"Every location tracks jobs in its own tool. Someone stitches spreadsheets together by hand every Friday, and by Monday managers show up with different numbers.",
+  a_IMPACT:"Honestly? The first twenty minutes go to arguing about whose numbers are right. Staffing decisions get pushed to the next week.",
+  a_STAKE:"Location managers pull their own reports. Finance builds a separate version for our CFO. I present the combined view to the leadership team every Monday. Finance would have to agree on any new source of truth.",
+  a_SUCCESS:"One set of numbers everyone trusts, ready before Monday's meeting, without someone losing their Friday to spreadsheets.",
+  a_FEATURE:"Sure, maybe later. Right now I'm more worried about whether the numbers are right than what color they are.",
+  m_next:"This has been helpful. So, what do you suggest we do next?",
+  s4_A:"Run a full product demo now so Morgan can see everything the platform does.",
+  s4_B:"Summarize what you've heard, confirm the outcome Morgan wants, and propose a focused follow-up with the people who rely on these reports.",
+  s4_C:"Send pricing today so Morgan can start the budget conversation.",
+  s4_D:"Suggest a short follow-up to understand how reporting works across locations before proposing anything.",
+  y4_A:"Let me walk you through the full platform so you can see everything it does.",
+  y4_B:"Let me play back what I heard: reporting is pulled together by hand and the numbers don't line up. Could we set up a focused session with the people who rely on these reports to confirm what “better” looks like?",
+  y4_C:"I'll send pricing over today so you can start the budget conversation.",
+  y4_D:"Before I propose anything, could we schedule a short follow-up so I can understand how reporting works across your locations?",
+  m4_B_strong:"That's exactly it. If you can show us how we'd get one set of numbers before Monday, I'll bring Priya from Finance.",
+  m4_B_thin:"Sure… though I'm not sure we've nailed down the problem yet. What exactly would we be validating?",
+  m4_D_thin:"That makes sense. Honestly, it would help to walk you through how it works today.",
+  m4_D_strong:"We could… though I feel like I've already told you a lot. I was hoping for a clearer next step.",
+  m4_A:"Okay… but we'd mostly be looking at features we may not need. Could you just send me a recording?",
+  m4_C:"I'll take a look, but it's hard to justify a number when we haven't agreed on what we're solving.",
+},
+es:{
+  m_open:"Gracias por tu tiempo. Necesitamos un mejor dashboard de reportes. ¿Nos puedes mostrar lo que hace tu plataforma?",
+  s1_A:"¡Claro! Nuestros dashboards son totalmente personalizables. Déjame compartir mi pantalla.",
+  s1_B:"Con gusto. Antes de mostrarte algo, ¿qué está pasando hoy con los reportes que más te gustaría cambiar?",
+  s1_C:"Claro. Primero, ¿qué presupuesto tienen y quién firmaría el contrato?",
+  m_pain:"Buena pregunta. Cada sede registra sus trabajos en su propia herramienta. Cada viernes alguien exporta hojas de cálculo y las une a mano.",
+  n_demo:"Compartes pantalla y recorres el creador de dashboards. Morgan asiente y luego se queda en silencio.",
+  m_demo:"Se ve bien. La verdad, no sé cuáles de estas vistas usaríamos realmente.",
+  m_guard:"Es un poco pronto para eso. Todavía no sé si esto es lo que necesitamos.",
+  r_A1:"Hagamos una pausa. ¿En qué te gustaría que un dashboard ayudara más a tu equipo?",
+  r_A2:"Déjame ir a la vista ejecutiva. Es la más popular.",
+  r_C1:"Tienes razón, me adelanté. ¿Qué está pasando con los reportes que te llevó a contactarnos?",
+  r_C2:"No hay problema. Te muestro la plataforma y hablamos de números después.",
+  m_sure:"Claro.", m_okay:"Está bien.", n_shortdemo:"Haces una demo breve de la plataforma.",
+  m_s2_known:"Y para el lunes, cada gerente llega con números distintos. Se ha vuelto un verdadero dolor de cabeza.",
+  m_s2_hidden:"En fin, los reportes han sido un dolor de cabeza desde hace tiempo.",
+  q_PAIN:"Mencionaste que los reportes son un dolor de cabeza. ¿Qué los hace difíciles hoy?",
+  q_IMPACT:"¿Qué pasa en sus revisiones semanales cuando los números no coinciden?",
+  q_STAKE:"¿Quién usa estos reportes hoy y qué decisiones dependen de ellos?",
+  q_SUCCESS:"Si en seis meses los reportes funcionaran como quieres, ¿qué sería diferente?",
+  q_FEATURE:"¿Te gustaría ver las opciones de colores y diseño de nuestros dashboards?",
+  a_PAIN:"Cada sede registra trabajos en su propia herramienta. Cada viernes alguien une hojas de cálculo a mano, y el lunes cada gerente llega con números distintos.",
+  a_IMPACT:"¿La verdad? Los primeros veinte minutos se van en discutir qué números son los correctos. Las decisiones de personal se posponen a la siguiente semana.",
+  a_STAKE:"Los gerentes de cada sede sacan sus propios reportes. Finanzas arma otra versión para nuestra CFO. Yo presento la vista combinada al equipo directivo cada lunes. Finanzas tendría que estar de acuerdo con cualquier nueva fuente de verdad.",
+  a_SUCCESS:"Un solo conjunto de números en el que todos confíen, listo antes de la junta del lunes, sin que alguien pierda su viernes en hojas de cálculo.",
+  a_FEATURE:"Claro, tal vez después. Ahorita me preocupa más que los números sean correctos que de qué color son.",
+  m_next:"Esto ha sido útil. Entonces, ¿qué sugieres que hagamos ahora?",
+  s4_A:"Hacer ahora una demo completa del producto para que Morgan vea todo lo que hace la plataforma.",
+  s4_B:"Resumir lo que escuchaste, confirmar el resultado que Morgan busca y proponer un seguimiento enfocado con las personas que dependen de estos reportes.",
+  s4_C:"Enviar precios hoy para que Morgan empiece la conversación de presupuesto.",
+  s4_D:"Sugerir un seguimiento breve para entender cómo funcionan los reportes en las sedes antes de proponer algo.",
+  y4_A:"Déjame mostrarte toda la plataforma para que veas todo lo que hace.",
+  y4_B:"Déjame resumir lo que escuché: los reportes se arman a mano y los números no cuadran. ¿Podemos agendar una sesión enfocada con las personas que dependen de estos reportes para confirmar cómo se ve “mejor”?",
+  y4_C:"Hoy mismo te envío precios para que empieces la conversación de presupuesto.",
+  y4_D:"Antes de proponer algo, ¿podemos agendar un seguimiento breve para entender cómo funcionan los reportes en tus sedes?",
+  m4_B_strong:"Exacto. Si nos muestras cómo tener un solo conjunto de números antes del lunes, invito a Priya de Finanzas.",
+  m4_B_thin:"Claro… aunque no sé si ya tenemos claro el problema. ¿Qué validaríamos exactamente?",
+  m4_D_thin:"Tiene sentido. La verdad, sería útil explicarte cómo funciona hoy.",
+  m4_D_strong:"Podríamos… aunque siento que ya te conté bastante. Esperaba un siguiente paso más claro.",
+  m4_A:"Está bien… pero veríamos sobre todo funciones que quizá no necesitamos. ¿Me puedes mandar una grabación?",
+  m4_C:"Lo revisaré, pero es difícil justificar una cifra cuando no hemos acordado qué vamos a resolver.",
+}};
+
+/* Discovery notes (only what Morgan said) */
+const NOTES = {
+  en:{pain:"Reports are assembled by hand from several tools.",impact:"Mismatched numbers delay decisions in weekly reviews.",stake:"Finance must agree on any new source of truth.",success:"Success = one trusted set of numbers before Monday."},
+  es:{pain:"Los reportes se arman a mano desde varias herramientas.",impact:"Los números que no coinciden retrasan decisiones en las revisiones semanales.",stake:"Finanzas debe aprobar cualquier nueva fuente de verdad.",success:"Éxito = un solo conjunto de números confiable antes del lunes."}
+};
+
+/* Evidence cards: [flag, revealed text, unrevealed text, expected if unrevealed, reason key if unrevealed] */
+const CARDS = {
+  E1:{flag:"workflow_pain", en:["Reports are assembled by hand from several tools.","Reporting is mostly a manual process."], es:["Los reportes se arman a mano desde varias herramientas.","Los reportes son un proceso mayormente manual."], hidden:"assumed", why:"r_likely"},
+  E2:{flag:"business_impact", en:["Mismatched numbers delay decisions in weekly reviews.","Reporting problems are slowing down business decisions."], es:["Los números que no coinciden retrasan decisiones en las revisiones semanales.","Los problemas de reportes están frenando decisiones de negocio."], hidden:"assumed", why:"r_likely"},
+  E3:{flag:"stakeholders", en:["Finance must agree on any new source of truth.","Who else needs to be involved in this decision?"], es:["Finanzas debe aprobar cualquier nueva fuente de verdad.","¿Quién más debe participar en esta decisión?"], hidden:"learn", why:"r_learn"},
+  E4:{flag:"success_criteria", en:["Success means one trusted set of numbers before Monday.","What would success look like for Morgan?"], es:["El éxito es un solo conjunto de números confiable antes del lunes.","¿Cómo se vería el éxito para Morgan?"], hidden:"learn", why:"r_learn"},
+  E5:{flag:null, en:[null,"Northshore already has budget approved for a new tool."], es:[null,"Northshore ya tiene presupuesto aprobado para una nueva herramienta."], hidden:"assumed", why:"r_budget"},
+  E6:{flag:null, en:[null,"A new dashboard will fix how the reports are put together."], es:[null,"Un nuevo dashboard resolverá cómo se arman los reportes."], hidden:"assumed", why:"r_solution"},
+  E7:{flag:null, en:[null,"Who has final sign-off on a purchase?"], es:[null,"¿Quién tiene la aprobación final de una compra?"], hidden:"learn", why:"r_learn"},
+};
+
+/* Designer's notes per scene */
+const DN = {
+en:[
+  "The briefing gives just enough context to act, like a CRM record before a call. The objective is stated as a behavior, not a topic, so learners know what “good” looks like before they start.",
+  "All three options are things real sellers say. Weak choices create believable friction and then a chance to recover, so the rubric can separate “asked well” from “recovered well.” There are no in-scene verdicts: Morgan's reaction is the feedback.",
+  "Two sequential questions mirror a real call, where each answer shapes the next question. The options change with what Morgan has revealed. The feature question is a plausible detour, not a trap: Morgan models how a prospect pulls a seller back to the problem.",
+  "This scene makes thinking visible. A learner who skipped discovery ends up with more cards in “Assumed,” so the board shows the cost of earlier choices without a lecture. Radio buttons replace drag-and-drop, so it works with keyboard, touch and screen readers.",
+  "There is no universally right answer. The same choice is strong or weak depending on what the learner uncovered, which is how discovery works in the field. The justification step makes the learner say why, not just what.",
+  "The debrief quotes the learner's own choices instead of generic praise, and it's labeled a practice rubric, not a score. Replay invites experimentation: trying the “wrong” path on purpose deepens the contrast."
+],
+es:[
+  "El briefing da el contexto justo para actuar, como un registro de CRM antes de una llamada. El objetivo se plantea como una conducta, no como un tema, para que quien aprende sepa cómo se ve “hacerlo bien” antes de empezar.",
+  "Las tres opciones son cosas que los vendedores dicen de verdad. Las decisiones débiles generan una fricción creíble y luego una oportunidad de recuperarse, así la rúbrica distingue entre “preguntó bien” y “se recuperó bien”. No hay veredictos en la escena: la reacción de Morgan es la retroalimentación.",
+  "Dos preguntas en secuencia reflejan una llamada real, donde cada respuesta define la siguiente pregunta. Las opciones cambian según lo que Morgan ha revelado. La pregunta sobre funciones es un desvío creíble, no una trampa: Morgan muestra cómo un prospecto regresa al vendedor al problema.",
+  "Esta escena hace visible el razonamiento. Quien se saltó el descubrimiento termina con más tarjetas en “Supuesto”, así el tablero muestra el costo de las decisiones anteriores sin sermones. Los botones de opción reemplazan el arrastrar y soltar, así funciona con teclado, pantalla táctil y lectores de pantalla.",
+  "No hay una respuesta universalmente correcta. La misma decisión es fuerte o débil según lo que se descubrió, como pasa en el campo. El paso de justificación hace que quien aprende diga por qué, no solo qué.",
+  "El debrief cita las decisiones de quien aprende en lugar de elogios genéricos, y se presenta como rúbrica de práctica, no como calificación. Repetir invita a experimentar: probar a propósito el camino “equivocado” profundiza el contraste."
+]};
+
+/* Debrief copy */
+const DB = {
+en:{
+  clarify:{2:"You asked about the current situation before showing anything. That's what got Morgan to explain the real problem.",
+           1:x=>`You opened with ${x}, then recovered with an open question. Recovering is a real skill; leading with the question keeps the momentum.`,
+           0:"The conversation stayed on the product, so Morgan never explained what was behind the request.",
+           x:{A:"a demo",C:"a budget question"}, tryQ:"“What's happening today that made you reach out?”"},
+  impact:{2:"You connected the symptom to its business cost: mismatched numbers delay staffing decisions.",
+          1:x=>`You learned ${x}, but not what the problem costs Northshore today.`,
+          0:"You heard the symptom but didn't explore what it costs the business.",
+          x:{stake:"who's involved",success:"what success looks like",both:"who's involved and what success looks like"}, tryQ:"“What happens when those numbers don't match?”"},
+  unc:{2:"You separated what Morgan said from what you assumed.",
+       1:x=>`You caught some gaps, but treated “${x}” as a fact.`,
+       "1g":"You caught some gaps, but a few cards landed in a different column than the evidence supports.",
+       0:"Several assumptions were treated as facts. That's how proposals end up solving the wrong problem.",
+       tryQ:"“Before I suggest anything, can I check what I've heard so far?”"},
+  next:{2:x=>`Your next step matched the evidence you had, and you could point to why: “${x}”`,
+        "2n":"Your next step matched the evidence you had: not enough yet to propose anything, so you went back to discovery.",
+        "2u":"Your next step matched the evidence, but you didn't point to a note that supports it. Naming the evidence is what makes the recommendation credible.",
+        "1B":"Your next step was reasonable, but you didn't have enough evidence yet to confirm an outcome.",
+        "1D":"You had enough to move forward. Another discovery call could cost momentum.",
+        0:x=>`${x} without a defined problem gave Morgan no reason to move forward.`,
+        x:{A:"A demo",C:"A price quote"}, tryQ:"“Based on what you've shared, would it make sense to…?”"},
+  pathS1:{A:"Demo first",B:"Diagnose first",C:"Qualify first"}, pathRec:{1:"recovered",2:"no recovery"},
+  pathQ:{PAIN:"Pain",IMPACT:"Impact",STAKE:"People",SUCCESS:"Success",FEATURE:"Feature"},
+  pathS4:{A:"Full demo",B:"Focused follow-up",C:"Send pricing",D:"Back to discovery"}
+},
+es:{
+  clarify:{2:"Preguntaste por la situación actual antes de mostrar algo. Eso hizo que Morgan explicara el problema real.",
+           1:x=>`Empezaste con ${x} y luego te recuperaste con una pregunta abierta. Recuperarse es una habilidad real; empezar con la pregunta mantiene el ritmo.`,
+           0:"La conversación se quedó en el producto, así que Morgan nunca explicó qué había detrás de la solicitud.",
+           x:{A:"una demo",C:"una pregunta de presupuesto"}, tryQ:"“¿Qué está pasando hoy que te llevó a contactarnos?”"},
+  impact:{2:"Conectaste el síntoma con su costo para el negocio: los números que no coinciden retrasan decisiones de personal.",
+          1:x=>`Descubriste ${x}, pero no cuánto le cuesta hoy el problema a Northshore.`,
+          0:"Escuchaste el síntoma, pero no exploraste cuánto le cuesta al negocio.",
+          x:{stake:"quién participa",success:"cómo se ve el éxito",both:"quién participa y cómo se ve el éxito"}, tryQ:"“¿Qué pasa cuando esos números no coinciden?”"},
+  unc:{2:"Separaste lo que Morgan dijo de lo que tú suponías.",
+       1:x=>`Detectaste algunos huecos, pero tomaste “${x}” como un hecho.`,
+       "1g":"Detectaste algunos huecos, pero algunas tarjetas quedaron en una columna distinta a la que respalda la evidencia.",
+       0:"Tomaste varios supuestos como hechos. Así es como las propuestas terminan resolviendo el problema equivocado.",
+       tryQ:"“Antes de sugerir algo, ¿puedo confirmar lo que he escuchado hasta ahora?”"},
+  next:{2:x=>`Tu siguiente paso coincidió con la evidencia que tenías, y pudiste explicar por qué: “${x}”`,
+        "2n":"Tu siguiente paso coincidió con la evidencia que tenías: todavía no era suficiente para proponer algo, así que volviste al descubrimiento.",
+        "2u":"Tu siguiente paso coincidió con la evidencia, pero no señalaste una nota que lo respalde. Nombrar la evidencia es lo que hace creíble la recomendación.",
+        "1B":"Tu siguiente paso era razonable, pero aún no tenías evidencia suficiente para confirmar un resultado.",
+        "1D":"Ya tenías suficiente para avanzar. Otra llamada de descubrimiento podría frenar el ritmo.",
+        0:x=>`${x} sin un problema definido no le dio a Morgan una razón para avanzar.`,
+        x:{A:"Una demo",C:"Una cotización"}, tryQ:"“Con base en lo que me compartiste, ¿tendría sentido…?”"},
+  pathS1:{A:"Demo primero",B:"Diagnosticar primero",C:"Calificar primero"}, pathRec:{1:"te recuperaste",2:"sin recuperación"},
+  pathQ:{PAIN:"Dolor",IMPACT:"Impacto",STAKE:"Personas",SUCCESS:"Éxito",FEATURE:"Funciones"},
+  pathS4:{A:"Demo completa",B:"Seguimiento enfocado",C:"Enviar precios",D:"Volver a descubrir"}
+}};
+
+/* =========================================================
+   Icons & illustrations (inline SVG, decorative)
+   ========================================================= */
+const ic = {
+  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>',
+  screen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+  dollar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+  chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>',
+  people:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.2c2.9.3 5 2.4 5 5.8"/></svg>',
+  flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4h11l-2 4 2 4H5"/></svg>',
+  palette:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.8 2-1.8 0-1.3-1.1-1.7-1.1-2.8 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg>',
+  handshake:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 11l3-3 3 2 3-3 4 4-6 6-2-1-2 2-3-1-4-4z"/><path d="M3 9l3-3"/></svg>',
+  note:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.5L16 9.5"/></svg>',
+  half:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>',
+  dashed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-dasharray="3 3" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>',
+  redo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
+  arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  bulb:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>',
+  target:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>',
+  info:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>',
+  route:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5"/></svg>',
+};
+
+/* Morgan in a video tile; expression varies by mood */
+function morganSVG(mood){
+  const brows = {engaged:'M84 62 q8 -6 16 -2 M116 60 q8 -4 16 2', neutral:'M84 62 h16 M116 62 h16', guarded:'M84 59 q8 4 16 4 M116 63 q8 0 16 -4'}[mood];
+  const mouth = {engaged:'M98 92 q10 10 20 0', neutral:'M100 94 h16', guarded:'M99 96 q9 -6 18 0'}[mood];
+  return `<svg viewBox="0 0 216 162" aria-hidden="true" focusable="false">
+    <rect width="216" height="162" fill="#2A2F55"/>
+    <rect x="132" y="14" width="66" height="54" rx="4" fill="#3B4175"/><path d="M165 14v54M132 41h66" stroke="#2A2F55" stroke-width="3"/>
+    <rect x="18" y="104" width="22" height="30" rx="4" fill="#67DED2" opacity=".8"/><path d="M29 104c-10-8-12-20-4-26 2 10 6 14 4 26zM29 104c8-10 16-12 20-6-8 2-12 4-20 6z" fill="#006E72"/>
+    <path d="M58 162c4-30 24-44 50-44s46 14 50 44z" fill="#6251B5"/>
+    <path d="M96 116h24l-12 14z" fill="#E9E3FF"/>
+    <rect x="99" y="98" width="18" height="20" rx="6" fill="#B9775A"/>
+    <path d="M70 70c-4-30 14-46 38-46s42 16 38 46c-2 18-6 30-12 36 2-18 0-30-6-38H88c-6 8-8 20-6 38-6-6-10-18-12-36z" fill="#241B3D"/>
+    <ellipse cx="108" cy="72" rx="28" ry="32" fill="#C98B6B"/>
+    <path d="M80 62c4-22 18-30 32-28 12 2 22 10 24 26-10-6-22-14-30-14-8 6-16 12-26 16z" fill="#241B3D"/>
+    <circle cx="94" cy="72" r="3" fill="#17213A"/><circle cx="122" cy="72" r="3" fill="#17213A"/>
+    <path d="${brows}" stroke="#241B3D" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="${mouth}" stroke="#7A3B2E" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="84" cy="84" r="5" fill="#E29C86" opacity=".5"/><circle cx="132" cy="84" r="5" fill="#E29C86" opacity=".5"/>
+    <rect x="8" y="140" width="72" height="16" rx="8" fill="rgba(16,22,43,.7)"/><text x="44" y="152" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#fff">Morgan Lee</text>
+  </svg>`;
+}
+
+const coverArt = `<svg viewBox="0 0 560 460" aria-hidden="true" focusable="false">
+  <g class="floaty"><rect x="40" y="70" width="400" height="260" rx="22" fill="#1B2240" stroke="#3A4270" stroke-width="2"/>
+  <rect x="40" y="70" width="400" height="36" rx="22" fill="#232B50"/><rect x="40" y="90" width="400" height="16" fill="#232B50"/>
+  <circle cx="66" cy="88" r="5" fill="#67DED2"/><circle cx="84" cy="88" r="5" fill="#CDBDFF"/><circle cx="102" cy="88" r="5" fill="#53627B"/>
+  <rect x="60" y="122" width="236" height="188" rx="14" fill="#2A2F55"/>
+  <rect x="200" y="140" width="80" height="60" rx="4" fill="#3B4175"/>
+  <path d="M110 310c4-36 26-54 56-54s52 18 56 54z" fill="#6251B5"/>
+  <rect x="155" y="236" width="22" height="24" rx="7" fill="#B9775A"/>
+  <path d="M122 200c-4-36 16-56 44-56s48 20 44 56c-2 20-6 34-14 42 2-20 0-34-8-44h-44c-8 10-10 24-8 44-8-8-12-22-14-42z" fill="#241B3D"/>
+  <ellipse cx="166" cy="202" rx="32" ry="37" fill="#C98B6B"/>
+  <path d="M134 190c4-26 22-34 38-32 14 2 26 12 28 30-12-6-26-16-34-16-10 6-20 14-32 18z" fill="#241B3D"/>
+  <circle cx="153" cy="202" r="3.5" fill="#17213A"/><circle cx="180" cy="202" r="3.5" fill="#17213A"/>
+  <path d="M155 222q11 10 22 0" stroke="#7A3B2E" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <rect x="312" y="122" width="112" height="88" rx="14" fill="#2A2F55"/><circle cx="368" cy="158" r="18" fill="#67DED2"/><path d="M340 210c2-20 14-30 28-30s26 10 28 30z" fill="#67DED2" opacity=".7"/>
+  <rect x="312" y="222" width="112" height="88" rx="14" fill="#E9E3FF"/>
+  <text x="326" y="246" font-family="IBM Plex Mono,monospace" font-size="10" fill="#6251B5" letter-spacing="1">NOTES</text>
+  <rect x="326" y="258" width="84" height="7" rx="3.5" fill="#6251B5" opacity=".55"/><rect x="326" y="274" width="64" height="7" rx="3.5" fill="#6251B5" opacity=".35"/><rect x="326" y="290" width="74" height="7" rx="3.5" fill="#006E72" opacity=".55"/></g>
+  <path d="M90 330h300l40 40H50z" fill="#232B50"/><rect x="50" y="370" width="380" height="12" rx="6" fill="#2E3660"/>
+  <g class="floaty d2"><rect x="380" y="20" width="150" height="86" rx="20" fill="#67DED2"/><path d="M410 106l-6 22 26-22z" fill="#67DED2"/>
+  <text x="455" y="78" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="46" fill="#10162B">?</text></g>
+  <g class="floaty"><rect x="440" y="250" width="100" height="120" rx="16" fill="#6251B5"/><path d="M462 282h56M462 302h44M462 322h50" stroke="#E9E3FF" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="530" cy="262" r="16" fill="#67DED2"/><path d="M523 262l5 5 9-10" stroke="#10162B" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <circle cx="30" cy="40" r="6" fill="#CDBDFF" opacity=".6"/><circle cx="520" cy="420" r="8" fill="#67DED2" opacity=".5"/><circle cx="18" cy="300" r="4" fill="#67DED2" opacity=".7"/>
+</svg>`;
+
+const buildingSVG = `<svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="6" y="10" width="18" height="26" rx="3" fill="#67DED2"/><rect x="24" y="18" width="12" height="18" rx="3" fill="#CDBDFF"/><g fill="#10162B"><rect x="10" y="15" width="4" height="4" rx="1"/><rect x="16" y="15" width="4" height="4" rx="1"/><rect x="10" y="22" width="4" height="4" rx="1"/><rect x="16" y="22" width="4" height="4" rx="1"/><rect x="13" y="29" width="4" height="7" rx="1"/><rect x="28" y="23" width="4" height="4" rx="1"/></g></svg>`;
+
+const boardArt = `<svg viewBox="0 0 160 120" aria-hidden="true" focusable="false">
+  <rect x="6" y="8" width="140" height="100" rx="12" fill="#E9E3FF" stroke="#6251B5" stroke-width="3"/>
+  <path d="M53 18v80M100 18v80" stroke="#CDBDFF" stroke-width="2" stroke-dasharray="4 4"/>
+  <rect x="16" y="24" width="30" height="22" rx="4" fill="#fff"/><rect x="16" y="54" width="30" height="22" rx="4" fill="#fff"/>
+  <rect x="62" y="30" width="30" height="22" rx="4" fill="#fff"/><rect x="108" y="22" width="30" height="22" rx="4" fill="#fff"/><rect x="108" y="52" width="30" height="22" rx="4" fill="#fff"/>
+  <circle cx="31" cy="24" r="4" fill="#006E72"/><circle cx="31" cy="54" r="4" fill="#006E72"/><circle cx="77" cy="30" r="4" fill="#6251B5"/><circle cx="123" cy="22" r="4" fill="#53627B"/><circle cx="123" cy="52" r="4" fill="#53627B"/>
+  <g class="floaty"><circle cx="122" cy="92" r="16" fill="#fff" stroke="#10162B" stroke-width="5"/><path d="M133 103l16 14" stroke="#10162B" stroke-width="7" stroke-linecap="round"/></g>
+</svg>`;
+
+const debriefArt = `<svg viewBox="0 0 220 180" aria-hidden="true" focusable="false">
+  <circle cx="110" cy="92" r="80" fill="#6251B5" opacity=".35"/>
+  <g class="floaty"><rect x="54" y="22" width="112" height="144" rx="12" fill="#fff"/><rect x="54" y="22" width="16" height="144" rx="6" fill="#CDBDFF"/>
+  <g stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <circle cx="90" cy="52" r="9" fill="#67DED2" stroke="none"/><path d="M85 52l4 4 7-8" stroke="#10162B" stroke-width="3"/>
+  <circle cx="90" cy="82" r="9" fill="#67DED2" stroke="none"/><path d="M85 82l4 4 7-8" stroke="#10162B" stroke-width="3"/>
+  <circle cx="90" cy="112" r="9" fill="#67DED2" stroke="none"/><path d="M85 112l4 4 7-8" stroke="#10162B" stroke-width="3"/>
+  <circle cx="90" cy="142" r="9" fill="#67DED2" stroke="none"/><path d="M85 142l4 4 7-8" stroke="#10162B" stroke-width="3"/>
+  <path d="M106 52h44M106 82h36M106 112h40M106 142h30" stroke="#C9CFE0" stroke-width="6"/></g></g>
+  <g class="floaty d2"><rect x="160" y="40" width="12" height="96" rx="6" fill="#67DED2" transform="rotate(18 166 88)"/><path d="M178 128l-6 18-6-20z" fill="#10162B" transform="rotate(18 166 88)"/></g>
+</svg>`;
+
+/* =========================================================
+   State
+   ========================================================= */
+const fresh = () => ({
+  scene:-1,            // -1 cover, 0..5
+  phase:"choose",
+  s1:null, rec:null,
+  asked:[], board:{}, boardChecked:false,
+  s4:null, justify:[],
+  flags:{},
+  log:[],              // {who, k, sc, id}
+  notes:[],            // note keys in order
+  mood:"engaged",
+  newMsgs:0, newNote:null,
+});
+let S = Object.assign(fresh(), {lang:"en", dn:false});
+let focusId = null, msgSeq = 0;
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const t = k => T[S.lang][k];
+const line = k => L[S.lang][k];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function announce(msg){
+  const r = document.getElementById("sr-live");
+  r.textContent = "";
+  setTimeout(()=>{ r.textContent = msg; }, 60);
+}
+function say(who, k){ const id = "m"+(++msgSeq); S.log.push({who,k,sc:S.scene,id}); S.newMsgs++; return id; }
+function addNote(key){
+  if(S.notes.includes(key)) return;
+  S.notes.push(key); S.newNote = key;
+  setTimeout(()=>announce(T[S.lang].noteNew + NOTES[S.lang][key]), reduce ? 200 : 900);
+}
+function setFlag(f){ S.flags[f] = true; }
+const strong = () => !!(S.flags.workflow_pain && (S.flags.business_impact || S.flags.success_criteria));
+
+/* =========================================================
+   Scoring (practice rubric)
+   ========================================================= */
+function cardState(id){
+  const c = CARDS[id], revealed = c.flag && S.flags[c.flag];
+  return { text: c[S.lang][revealed ? 0 : 1], expected: revealed ? "known" : c.hidden, why: revealed ? "r_known" : c.why };
+}
+function boardScore(){
+  let matches = 0, firstAssumedAsKnown = null;
+  Object.keys(CARDS).forEach(id=>{
+    const st = cardState(id), pick = S.board[id];
+    if(pick === st.expected) matches++;
+    if(st.expected === "assumed" && pick === "known" && !firstAssumedAsKnown) firstAssumedAsKnown = st.text;
+  });
+  let level = matches >= 6 ? 2 : matches >= 4 ? 1 : 0;
+  if(firstAssumedAsKnown) level = Math.min(level, 1);
+  return {matches, level, firstAssumedAsKnown};
+}
+function rubric(){
+  const D = DB[S.lang];
+  const out = [];
+  // 1 Clarify
+  let c = S.s1 === "B" ? 2 : (S.rec === "1" ? 1 : 0);
+  out.push({lvl:c, text: c===2 ? D.clarify[2] : c===1 ? D.clarify[1](D.clarify.x[S.s1]) : D.clarify[0], tryQ:D.clarify.tryQ});
+  // 2 Impact
+  const f = S.flags;
+  let i = f.business_impact ? 2 : (f.stakeholders || f.success_criteria) ? 1 : 0;
+  const which = f.stakeholders && f.success_criteria ? "both" : f.stakeholders ? "stake" : "success";
+  out.push({lvl:i, text: i===2 ? D.impact[2] : i===1 ? D.impact[1](D.impact.x[which]) : D.impact[0], tryQ:D.impact.tryQ});
+  // 3 Uncertainty
+  const b = boardScore();
+  out.push({lvl:b.level, text: b.level===2 ? D.unc[2] : b.level===1 ? (b.firstAssumedAsKnown ? D.unc[1](b.firstAssumedAsKnown) : D.unc["1g"]) : D.unc[0], tryQ:D.unc.tryQ});
+  // 4 Next step
+  let n, txt; const st = strong();
+  if(S.s4 === "A" || S.s4 === "C"){ n = 0; txt = D.next[0](D.next.x[S.s4]); }
+  else if((S.s4 === "B" && st) || (S.s4 === "D" && !st)){
+    if(S.justify.length){ n = 2; txt = D.next[2](NOTES[S.lang][S.justify[0]]); }
+    else if(!S.notes.length){ n = 2; txt = D.next["2n"]; }
+    else { n = 1; txt = D.next["2u"]; }
+  } else { n = 1; txt = S.s4 === "B" ? D.next["1B"] : D.next["1D"]; }
+  out.push({lvl:n, text:txt, tryQ:D.next.tryQ});
+  return out;
+}
+
+/* =========================================================
+   Rendering helpers
+   ========================================================= */
+function langToggle(){
+  return `<div class="lang" role="group" aria-label="${t("langGroup")}">
+    <button type="button" id="lang-en" lang="en" aria-pressed="${S.lang==="en"}" data-act="lang" data-v="en" aria-label="English">EN</button>
+    <button type="button" id="lang-es" lang="es" aria-pressed="${S.lang==="es"}" data-act="lang" data-v="es" aria-label="Español">ES</button>
+  </div>`;
+}
+function header(){
+  const n = S.scene;
+  const bars = [0,1,2,3,4,5].map(i=>`<span class="${i<n?"done":i===n?"now":""}"></span>`).join("");
+  return `<header class="app-header"><div class="app-header-inner">
+    <a class="app-brand" href="#" data-act="home">${t("brandA")} <span>${t("brandB")}</span></a>
+    <div class="hdr-tools">
+      <button type="button" class="switch" role="switch" id="dn-toggle" aria-checked="${S.dn}" data-act="dn" title="${esc(t("notesHint"))}"><span class="track" aria-hidden="true"></span><span>${t("notesToggle")}</span></button>
+      ${langToggle()}
+      <button type="button" class="icon-btn" data-act="restart">${ic.redo}<span>${t("restart")}</span></button>
+    </div>
+    <div class="progress"><span class="mono progress-label">${esc(t("progress")(String(n).padStart(2,"0"), t("sceneNames")[n]))}</span>
+      <div class="progress-bar" aria-hidden="true">${bars}</div></div>
+  </div></header>`;
+}
+function sceneHead(title, lead){
+  return `<div class="scene-head fade">
+    <span class="eyebrow mono">${t("micro")[S.scene]}</span>
+    <h1 id="scene-title" tabindex="-1">${esc(title)}</h1>
+    ${lead ? `<p class="lead">${esc(lead)}</p>` : ""}
+  </div>`;
+}
+function designerNote(){
+  if(!S.dn) return "";
+  return `<aside class="designer-note fade" aria-label="${esc(t("dnTitle"))}">${ic.bulb}<div><h2>${t("dnTitle")}</h2><p>${esc(DN[S.lang][S.scene])}</p></div></aside>`;
+}
+function callCard(){
+  return `<section class="call" aria-label="${esc(t("onCall"))}: Morgan Lee">
+    <div class="tile">${morganSVG(S.mood)}</div>
+    <div><span class="live mono"><span class="dot" aria-hidden="true"></span>${t("onCall")}</span>
+      <h2>Morgan Lee</h2><p class="role">${esc(t("b_role"))}</p>
+      <p class="mood">${t("moodLabel")} <b>${t("moods")[S.mood]}</b></p></div>
+  </section>`;
+}
+function msgHTML(m, isNew){
+  const cls = isNew ? " new" : "";
+  if(m.who === "narr") return `<p class="narr${cls}"><span class="sr-only">${t("narrLabel")}: </span>${esc(line(m.k))}</p>`;
+  const you = m.who === "you";
+  const name = you ? t("you") : t("morgan");
+  return `<div class="msg ${you?"you":"morgan"}${cls}" id="${m.id}" tabindex="-1">
+    <span class="ava" aria-hidden="true">${you ? (S.lang==="es"?"TÚ":"YOU") : "ML"}</span>
+    <p class="bubble"><span class="name">${name}</span>${esc(line(m.k))}</p></div>`;
+}
+function transcript(){
+  const firstNew = S.log.length - S.newMsgs;
+  const earlier = S.log.filter(m=>m.sc < S.scene);
+  const current = S.log.filter(m=>m.sc >= S.scene);
+  const earlierHTML = earlier.length ? `<details class="earlier"><summary>${t("earlier")(earlier.length)}</summary><div class="msgs">${earlier.map(m=>msgHTML(m,false)).join("")}</div></details>` : "";
+  const curHTML = current.map(m=>msgHTML(m, S.log.indexOf(m) >= firstNew)).join("");
+  return `<section class="card transcript" aria-labelledby="tr-h"><h2 id="tr-h" class="sr-only">${t("transcript")}</h2>${earlierHTML}${curHTML}</section>`;
+}
+function notesList(){
+  if(!S.notes.length) return `<p class="empty">${t("notesEmpty")}</p>`;
+  return `<ul>${S.notes.map(k=>`<li class="${k===S.newNote?"new":""}">${ic.pin}<span>${esc(NOTES[S.lang][k])}</span></li>`).join("")}</ul>`;
+}
+function notesAside(){
+  return `<aside class="aside" aria-labelledby="notes-h"><section class="notes"><h2 id="notes-h" class="mono">${ic.note}${t("notesTitle")}</h2>${notesList()}</section></aside>`;
+}
+function notesMobile(){
+  return `<details class="notes notes-mobile"><summary class="mono">${t("notesMobile")(S.notes.length)}<span aria-hidden="true">＋</span></summary>${notesList()}</details>`;
+}
+function option(name, value, icon, text, type="radio", checked=false){
+  return `<label class="opt${type==="checkbox"?" chk":""}"><input type="${type}" name="${name}" value="${value}" ${checked?"checked":""}/>
+    <span class="oic" aria-hidden="true">${ic[icon]}</span><span class="txt">${esc(text)}</span><span class="radio" aria-hidden="true"></span></label>`;
+}
+function choiceBlock(legend, hint, name, opts, btnAct){
+  return `<section class="card choices fade" aria-label="${esc(legend)}">
+    <fieldset><legend id="${name}-legend">${esc(legend)}</legend>
+      <p class="hint" id="${name}-hint">${esc(hint)}</p>
+      ${opts.map(o=>option(name, o.v, o.icon, o.text)).join("")}
+    </fieldset>
+    <p class="err" id="${name}-err" role="alert" hidden>${t("chooseFirst")}</p>
+    <div class="actions"><button type="button" class="btn btn-purple" data-act="${btnAct}" data-name="${name}">${t("respond")} ${ic.arrow}</button></div>
+  </section>`;
+}
+function continueBlock(act){
+  return `<div class="actions fade"><button type="button" class="btn btn-mint" id="continue-btn" data-act="${act}">${t("cont")} ${ic.arrow}</button></div>`;
+}
+function layout(colHTML, withNotes=true){
+  return `${header()}<main id="main" class="stage${withNotes?"":" single"}" tabindex="-1">
+    <div class="col">${colHTML}</div>${withNotes ? notesAside() : ""}</main>`;
+}
+
+/* =========================================================
+   Scenes
+   ========================================================= */
+function renderCover(){
+  return `<div class="cover dark">
+    <div class="cover-top"><a class="cover-brand" href="/">Alejandra Castillo<span>.</span></a>${langToggle()}</div>
+    <main id="main" class="cover-main" tabindex="-1">
+      <div class="fade">
+        <span class="pill mono"><span class="dot" aria-hidden="true"></span>${t("coverEyebrow")}</span>
+        <h1 id="scene-title" tabindex="-1">${t("coverTitle")}</h1>
+        <p class="sub">${t("coverSub")}</p>
+        <p class="body">${t("coverBody")}</p>
+        <button type="button" class="btn btn-mint" data-act="start">${t("start")} ${ic.arrow}</button>
+        <p class="meta">${t("meta").map(x=>`<span>${x}</span>`).join('<span aria-hidden="true">·</span>')}</p>
+      </div>
+      <div class="cover-art">${coverArt}</div>
+    </main>
+    <footer class="cover-foot">${t("coverFoot")} <a href="/">${t("backPortfolio")}</a></footer>
+  </div>`;
+}
+function renderBriefing(){
+  return layout(`${sceneHead(t("b_title"), t("b_intro"))}${designerNote()}
+    <div class="brief-grid fade">
+      <section class="card prospect" aria-labelledby="pros-h">
+        <div class="who"><span class="avatar" aria-hidden="true">ML</span><div><h2 id="pros-h">Morgan Lee</h2><p class="role">${t("b_role")}</p></div></div>
+        <div class="co">${buildingSVG}<span>Northshore Services · ${t("b_co")}</span></div>
+      </section>
+      <section class="card info"><h2><span class="ic">${ic.info}</span>${t("b_knowT")}</h2><p>${esc(t("b_know"))}</p></section>
+      <section class="card info objective"><h2><span class="ic">${ic.target}</span>${t("b_objT")}</h2><p>${t("b_obj")}</p></section>
+      <section class="card info"><h2><span class="ic">${ic.route}</span>${t("b_howT")}</h2><p>${t("b_how")}</p></section>
+    </div>
+    <div class="actions fade"><button type="button" class="btn btn-mint" data-act="join">${t("b_join")} ${ic.arrow}</button></div>`, false);
+}
+function renderS1(){
+  let block = "";
+  if(S.phase === "choose"){
+    block = choiceBlock(t("s1_prompt"), t("s1_hint"), "s1", [
+      {v:"A",icon:"screen",text:line("s1_A")},{v:"B",icon:"search",text:line("s1_B")},{v:"C",icon:"dollar",text:line("s1_C")}], "s1");
+  } else if(S.phase === "recover"){
+    const p = S.s1;
+    block = choiceBlock(t(p==="A"?"s1_recA":"s1_recC"), t("s1_hint"), "rec", [
+      {v:"1",icon:"search",text:line("r_"+p+"1")},{v:"2",icon:"screen",text:line("r_"+p+"2")}], "rec");
+  } else block = continueBlock("toS2");
+  return layout(`${sceneHead(t("s1_title"), t("s1_lead"))}${designerNote()}${callCard()}${notesMobile()}${transcript()}${block}`);
+}
+const QMETA = {PAIN:"search",IMPACT:"chart",STAKE:"people",SUCCESS:"flag",FEATURE:"palette"};
+function visibleQs(){
+  const pain = S.flags.workflow_pain;
+  return ["PAIN","IMPACT","STAKE","SUCCESS","FEATURE"].filter(q=>{
+    if(S.asked.includes(q)) return false;
+    if(q==="PAIN") return !pain;
+    if(q==="IMPACT"||q==="SUCCESS") return !!pain;
+    return true;
+  });
+}
+function renderS2(){
+  let block = "";
+  if(S.phase === "r1" || S.phase === "r2"){
+    const r1 = S.phase === "r1";
+    block = choiceBlock(t(r1?"s2_p1":"s2_p2"), t(r1?"s2_hint1":"s2_hint2"), "q", visibleQs().map(q=>({v:q,icon:QMETA[q],text:line("q_"+q)})), "q");
+  } else block = continueBlock("toS3");
+  return layout(`${sceneHead(t("s2_title"), t("s2_lead"))}${designerNote()}${callCard()}${notesMobile()}${transcript()}${block}`);
+}
+function renderS3(){
+  const ids = Object.keys(CARDS);
+  const sortedN = ids.filter(id=>S.board[id]).length;
+  const cards = ids.map((id,ix)=>{
+    const st = cardState(id), pick = S.board[id];
+    const radios = ["known","assumed","learn"].map(cat=>`<label><input type="radio" name="ev-${id}" value="${cat}" ${pick===cat?"checked":""} ${S.boardChecked?"disabled":""} data-card="${id}"/>${t("cat")[cat]}</label>`).join("");
+    let verdict = "";
+    if(S.boardChecked){
+      const ok = pick === st.expected;
+      verdict = `<div class="verdict ${ok?"ok":"no"}">${ok?ic.check:ic.info}<div><b>${ok?t("matches"):t("pointsTo")(t("cat")[st.expected])}</b>${esc(t(st.why))}</div></div>`;
+    }
+    return `<div class="card ev"><fieldset><legend><span class="sr-only">${ix+1}/7: </span>${esc(st.text)}</legend><div class="seg">${radios}</div></fieldset>${verdict}</div>`;
+  }).join("");
+  const legend = `<div class="legend" aria-hidden="true">${["known","assumed","learn"].map((c,i)=>`<div class="${["k","a","s"][i]}"><b>${t("cat")[c]}</b>${t("catDesc")[c]}</div>`).join("")}</div>`;
+  const legendSR = `<ul class="sr-only">${["known","assumed","learn"].map(c=>`<li>${t("cat")[c]}: ${t("catDesc")[c]}</li>`).join("")}</ul>`;
+  const actions = S.boardChecked
+    ? `<p class="summary-line" id="board-summary" tabindex="-1">${t("boardSummary")(boardScore().matches)}</p>${continueBlock("toS4")}`
+    : `<p class="err" id="board-err" role="alert" hidden>${t("sortAll")}</p><div class="actions"><span class="counter" aria-live="polite"><b>${sortedN}</b>${t("sorted")(sortedN)}</span><button type="button" class="btn btn-purple" data-act="check">${t("check")} ${ic.arrow}</button></div>`;
+  return layout(`<div class="board-art fade">${boardArt}${sceneHead(t("s3_title"), t("s3_lead"))}</div>${designerNote()}${legend}${legendSR}${notesMobile()}<div class="ev-grid fade">${cards}</div>${actions}`);
+}
+function renderS4(){
+  let block = "";
+  if(S.phase === "choose"){
+    block = choiceBlock(t("s4_prompt"), t("s4_hint"), "s4", [
+      {v:"A",icon:"screen",text:line("s4_A")},{v:"B",icon:"handshake",text:line("s4_B")},{v:"C",icon:"dollar",text:line("s4_C")},{v:"D",icon:"search",text:line("s4_D")}], "s4");
+  } else if(S.phase === "justify"){
+    const body = S.notes.length
+      ? `<fieldset><legend>${esc(t("s4_jPrompt"))}</legend><p class="hint">${t("s4_jHint")}</p>${S.notes.map(k=>option("just", k, "note", NOTES[S.lang][k], "checkbox", S.justify.includes(k))).join("")}</fieldset><p class="err" id="just-err" role="alert" hidden>${t("s4_max")}</p>`
+      : `<p class="lead">${t("s4_jNone")}</p>`;
+    block = `<section class="card choices fade" aria-label="${esc(t("s4_jPrompt"))}">${body}<div class="actions"><button type="button" class="btn btn-purple" data-act="justify">${t("s4_confirm")} ${ic.arrow}</button></div></section>`;
+  }
+  return layout(`${sceneHead(t("s4_title"), t("s4_lead"))}${designerNote()}${callCard()}${notesMobile()}${transcript()}${block}`);
+}
+function renderS5(){
+  const D = DB[S.lang], r = rubric();
+  const lvlIcon = [ic.dashed, ic.half, ic.check];
+  const chips = [`<span><i>01</i>${D.pathS1[S.s1]}${S.rec?` · ${D.pathRec[S.rec]}`:""}</span>`,
+    `<span><i>02</i>${t("pathQs")}: ${S.asked.map(q=>D.pathQ[q]).join(", ")}</span>`,
+    `<span><i>03</i>${t("pathBoard")(boardScore().matches)}</span>`,
+    `<span><i>04</i>${D.pathS4[S.s4]}</span>`].join("");
+  const dims = r.map((d,i)=>`<section class="card dim" aria-labelledby="dim-${i}">
+      <div class="dim-top"><h2 id="dim-${i}">${t("dims")[i]}</h2><span class="level l${d.lvl}">${lvlIcon[d.lvl]}${t("levels")[d.lvl]}</span></div>
+      <div class="meter l${d.lvl}" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="ev-text">${esc(d.text)}</p>
+      <p class="try"><b>${d.lvl===2?t("keepUsing"):t("tryNext")}</b>${esc(d.tryQ)}</p></section>`).join("");
+  return layout(`<div class="debrief-hero fade"><div><span class="eyebrow mono">${t("micro")[5]}</span>
+      <h1 id="scene-title" tabindex="-1" style="margin:12px 0 8px">${t("s5_title")}</h1><p>${t("s5_lead")}</p>
+      <div class="path" aria-label="${t("pathLabel")}">${chips}</div></div>${debriefArt}</div>
+    ${designerNote()}<div class="dims fade">${dims}</div>
+    <div class="closing fade"><p>${t("closing")}</p><div class="actions" style="justify-content:center">
+      <button type="button" class="btn btn-mint" data-act="replay">${ic.redo} ${t("replay")}</button>
+      <button type="button" class="btn btn-ghost" data-act="home">${t("backStart")}</button></div></div>
+    <p class="disclaim">${t("disclaim")} <a href="/">${t("backPortfolio")}</a></p>`, false);
+}
+
+function render(){
+  document.documentElement.lang = S.lang;
+  document.title = t("docTitle");
+  const html = S.scene < 0 ? renderCover() : [renderBriefing,renderS1,renderS2,renderS3,renderS4,renderS5][S.scene]();
+  document.getElementById("app").innerHTML = `<a class="skip" href="#main">${t("skip")}</a>` + html;
+  S.newMsgs = 0; S.newNote = null;
+  if(focusId){ const el = document.getElementById(focusId); if(el) el.focus({preventScroll:false}); focusId = null; }
+}
+function goScene(n){
+  S.scene = n; window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+  focusId = "scene-title";
+  render();
+  if(n >= 0) announce(t("sceneAnn")(String(n).padStart(2,"0"), t("sceneNames")[n]));
+}
+function picked(name){ const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; }
+function needPick(name){ const e = document.getElementById(name+"-err"); if(e){ e.hidden = false; } const first = document.querySelector(`input[name="${name}"]`); if(first) first.focus(); }
+
+/* =========================================================
+   Actions
+   ========================================================= */
+const act = {
+  lang(v){ if(S.lang===v) return; S.lang = v; focusId = "lang-"+v; render(); announce(t("langNow")); },
+  dn(){ S.dn = !S.dn; focusId = "dn-toggle"; render(); },
+  start(){ goScene(0); },
+  home(e){ if(e) e.preventDefault(); S = Object.assign(fresh(), {lang:S.lang, dn:S.dn}); goScene(-1); },
+  restart(){ const d = document.getElementById("restart-dlg");
+    document.getElementById("restart-title").textContent = t("restartTitle");
+    document.getElementById("restart-body").textContent = t("restartBody");
+    document.getElementById("restart-yes").textContent = t("restartYes");
+    document.getElementById("restart-no").textContent = t("restartNo");
+    d.showModal(); },
+  replay(){ S = Object.assign(fresh(), {lang:S.lang, dn:S.dn}); S.phase = "choose"; S.scene = 1; say("morgan","m_open"); goScene(1); },
+  join(){ S.phase = "choose"; S.mood = "engaged"; S.scene = 1; say("morgan","m_open"); goScene(1); },
+  s1(){
+    const v = picked("s1"); if(!v) return needPick("s1");
+    S.s1 = v; say("you","s1_"+v);
+    let last;
+    if(v === "B"){ setFlag("workflow_pain"); S.mood = "engaged"; last = say("morgan","m_pain"); addNote("pain"); S.phase = "done"; }
+    else if(v === "A"){ setFlag("premature_solution"); S.mood = "neutral"; say("narr","n_demo"); last = say("morgan","m_demo"); S.phase = "recover"; }
+    else { setFlag("trust_risk"); S.mood = "guarded"; last = say("morgan","m_guard"); S.phase = "recover"; }
+    focusId = last; render();
+  },
+  rec(){
+    const v = picked("rec"); if(!v) return needPick("rec");
+    S.rec = v; say("you","r_"+S.s1+v);
+    let last;
+    if(v === "1"){ setFlag("workflow_pain"); setFlag("recovered"); S.mood = "engaged"; last = say("morgan","m_pain"); addNote("pain"); }
+    else if(S.s1 === "A"){ S.mood = "neutral"; last = say("morgan","m_sure"); }
+    else { setFlag("premature_solution"); S.mood = "neutral"; say("narr","n_shortdemo"); last = say("morgan","m_okay"); }
+    S.phase = "done"; focusId = last; render();
+  },
+  toS2(){ S.scene = 2; S.phase = "r1"; say("morgan", S.flags.workflow_pain ? "m_s2_known" : "m_s2_hidden"); goScene(2); },
+  q(){
+    const v = picked("q"); if(!v) return needPick("q");
+    S.asked.push(v); say("you","q_"+v);
+    const map = {PAIN:["workflow_pain","pain"],IMPACT:["business_impact","impact"],STAKE:["stakeholders","stake"],SUCCESS:["success_criteria","success"],FEATURE:["feature_detour",null]};
+    setFlag(map[v][0]); if(map[v][1]) addNote(map[v][1]);
+    S.mood = v === "FEATURE" ? "neutral" : "engaged";
+    const last = say("morgan","a_"+v);
+    S.phase = S.phase === "r1" ? "r2" : "done";
+    focusId = last; render();
+  },
+  toS3(){ S.phase = "board"; goScene(3); },
+  check(){
+    const n = Object.keys(CARDS).filter(id=>S.board[id]).length;
+    if(n < 7){ document.getElementById("board-err").hidden = false; const firstEmpty = Object.keys(CARDS).find(id=>!S.board[id]); document.querySelector(`input[name="ev-${firstEmpty}"]`).focus(); return; }
+    S.boardChecked = true; focusId = "board-summary"; render(); announce(t("boardAnn")(boardScore().matches));
+  },
+  toS4(){ S.phase = "choose"; S.scene = 4; say("morgan","m_next"); goScene(4); },
+  s4(){
+    const v = picked("s4"); if(!v) return needPick("s4");
+    S.s4 = v; say("you","y4_"+v);
+    const st = strong(); let k;
+    if(v === "B") k = st ? "m4_B_strong" : "m4_B_thin";
+    else if(v === "D") k = st ? "m4_D_strong" : "m4_D_thin";
+    else k = "m4_"+v;
+    S.mood = (k==="m4_B_strong"||k==="m4_D_thin") ? "engaged" : (v==="A"||v==="C") ? "guarded" : "neutral";
+    const last = say("morgan",k); S.phase = "justify"; focusId = last; render();
+  },
+  justify(){
+    const sel = [...document.querySelectorAll('input[name="just"]:checked')].map(i=>i.value);
+    if(sel.length > 2){ document.getElementById("just-err").hidden = false; return; }
+    S.justify = sel; goScene(5);
+  },
+};
+
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-act]"); if(!b) return;
+  const a = b.dataset.act; if(!act[a]) return;
+  if(b.tagName === "A") e.preventDefault();
+  act[a](a==="lang" ? b.dataset.v : e);
+});
+document.addEventListener("change", e=>{
+  const i = e.target;
+  if(i.dataset && i.dataset.card){
+    S.board[i.dataset.card] = i.value;
+    const n = Object.keys(CARDS).filter(id=>S.board[id]).length;
+    const c = document.querySelector(".counter"); if(c) c.innerHTML = `<b>${n}</b>${t("sorted")(n)}`;
+    const er = document.getElementById("board-err"); if(er && n===7) er.hidden = true;
+  }
+  if(i.name && i.type === "radio"){ const er = document.getElementById(i.name+"-err"); if(er) er.hidden = true; }
+  if(i.name === "just"){
+    const sel = document.querySelectorAll('input[name="just"]:checked');
+    const er = document.getElementById("just-err");
+    if(sel.length > 2){ i.checked = false; if(er) er.hidden = false; } else if(er) er.hidden = true;
+  }
+});
+document.getElementById("restart-yes").addEventListener("click", ()=>{ document.getElementById("restart-dlg").close(); act.replay(); });
+document.getElementById("restart-no").addEventListener("click", ()=>document.getElementById("restart-dlg").close());
+
+/* Optional deep link for the portfolio: ?lang=es */
+const qp = new URLSearchParams(location.search);
+if(qp.get("lang") === "es") S.lang = "es";
+render();
+</script>
+</body>
+</html>

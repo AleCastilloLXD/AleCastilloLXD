@@ -33,7 +33,10 @@ export interface Project {
   solution?: string;
   outcome?: string;
   detailImages: string[];
-  link?: { href: string; label: string };
+  link?: { href: string; label: string; note?: string };
+  decisions?: { eyebrow: string; heading: string; items: ProjectChallenge[] };
+  accessibility?: { done: string[]; next: string[] };
+  detailCaptions?: string[];
 }
 
 export interface ExperienceCard {

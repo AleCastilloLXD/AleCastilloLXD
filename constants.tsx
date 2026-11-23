@@ -71,13 +71,54 @@ export const PROJECTS: Project[] = [
       }
     ],
     solution: "Six scenes, 8 to 10 minutes: a briefing, a branching conversation with recovery paths, an evidence board that reflects only what the prospect said, an evidence-aware next step and a debrief that quotes the learner's own choices. A Designer's notes toggle shows the reasoning behind each screen. English is the source language with a full Spanish localization.",
-    outcome: "Built as a working prototype with AI-assisted coding. Keyboard, reflow and contrast checks are done; screen-reader testing (NVDA and VoiceOver) and learner usability testing come next. Performance impact has not been measured.",
+    outcome: "Built as a working prototype with AI-assisted coding. Performance impact has not been measured; the accessibility section below lists exactly what has and hasn't been verified.",
+    decisions: {
+      eyebrow: "Behind the learning",
+      heading: "Three design decisions that shaped the experience",
+      items: [
+        {
+          title: "Practice before explanation",
+          description: "Learners make discovery decisions before receiving any instruction, so they can observe the consequences of each choice in the conversation itself."
+        },
+        {
+          title: "Evidence-aware learning",
+          description: "The evidence board separates confirmed information, assumptions and unanswered questions, helping learners notice the gaps in what they actually know."
+        },
+        {
+          title: "Feedback beyond right or wrong",
+          description: "The debrief evaluates four discovery behaviors and connects the learner's own choices to a targeted coaching question for next time."
+        }
+      ]
+    },
+    accessibility: {
+      done: [
+        "Keyboard-only run-through of the full flow: native buttons and radio groups, visible focus, and focus moved to each new reply",
+        "Reflow at 320 px wide with no horizontal scrolling",
+        "Text and key UI states checked against WCAG 2.2 AA contrast",
+        "Respects reduced-motion and reduced-transparency settings; no timers or auto-advance",
+        "Built-in screen reader support (live announcements, labeled groups, text alternative for Morgan's mood), not yet verified with a screen reader"
+      ],
+      next: [
+        "Screen reader testing with NVDA + Chrome and VoiceOver + Safari (macOS and iOS)",
+        "Text resize and 200% zoom check",
+        "Usability sessions with sellers, then a documented list of findings and fixes"
+      ]
+    },
     detailImages: [
       "/discovery-lab-1.webp",
       "/discovery-lab-2.webp",
       "/discovery-lab-3.webp"
     ],
-    link: { href: "/discovery-lab/", label: "Launch the simulation" },
+    detailCaptions: [
+      "Scene 01: the learner opens with a budget question. Morgan turns guarded, and the next step is a chance to recover, not a \u201cwrong answer\u201d screen.",
+      "Scene 03: the evidence board. Cards only state what Morgan actually said; everything else is sorted as an assumption or an open question.",
+      "Scene 05: the debrief rates four discovery behaviors and quotes the learner's own choices back, with a question to try next time."
+    ],
+    link: {
+      href: "/discovery-lab/",
+      label: "Try the Live Simulation",
+      note: "Explore the simulation as a learner, then turn on Designer's Notes to see the instructional thinking behind each screen."
+    },
   },
   {
     id: 17,

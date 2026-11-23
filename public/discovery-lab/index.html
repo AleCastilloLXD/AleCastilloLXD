@@ -21,7 +21,7 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{font-family:var(--f-body);font-size:17px;line-height:1.6;color:var(--ink);background:var(--cloud);-webkit-font-smoothing:antialiased}
+body{font-family:var(--f-body);font-size:17px;line-height:1.6;color:var(--ink);background-color:var(--cloud);background-image:radial-gradient(42rem 32rem at 8% 18%,rgba(205,189,255,.55),transparent 70%),radial-gradient(38rem 30rem at 92% 30%,rgba(103,222,210,.30),transparent 70%),radial-gradient(44rem 34rem at 55% 105%,rgba(160,175,255,.35),transparent 70%);background-attachment:fixed;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:var(--f-head);color:var(--ink);margin:0}
 p{margin:0}
 button{font:inherit;color:inherit}
@@ -100,7 +100,12 @@ main.stage.single{grid-template-columns:minmax(0,1fr)}
 .scene-head h1:focus-visible{outline:3px solid var(--purple);outline-offset:4px;border-radius:6px}
 .lead{color:var(--ink-2);font-size:17px;max-width:62ch}
 
-.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid #EDEFF5}
+.card{position:relative;border-radius:22px;background:linear-gradient(150deg,rgba(255,255,255,.88),rgba(255,255,255,.64));border:1px solid rgba(255,255,255,.9);box-shadow:0 10px 34px rgba(98,81,181,.13),inset 0 1px 0 rgba(255,255,255,.95);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%)}
+.card.tint-lav{background:linear-gradient(150deg,rgba(255,255,255,.9) 10%,rgba(222,212,255,.88))}
+.card.tint-mint{background:linear-gradient(150deg,rgba(255,255,255,.9) 10%,rgba(196,242,236,.88))}
+.card.tint-blue{background:linear-gradient(150deg,rgba(255,255,255,.9) 10%,rgba(212,224,255,.88))}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card{background:#fff}}
+@media (prefers-reduced-transparency:reduce){.card,.card.tint-lav,.card.tint-mint,.card.tint-blue{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}}
 .designer-note{border-radius:var(--radius);background:#fff;border:2px dashed var(--purple);padding:18px 20px;display:flex;gap:14px}
 .designer-note svg{flex:none;width:28px;height:28px;color:var(--purple)}
 .designer-note h2{font-size:16px;margin-bottom:4px;color:var(--purple)}
@@ -117,10 +122,10 @@ main.stage.single{grid-template-columns:minmax(0,1fr)}
 .prospect .co svg{flex:none;width:40px;height:40px}
 .info{padding:20px 22px;display:flex;flex-direction:column;gap:6px}
 .info h2{font-size:18px;display:flex;align-items:center;gap:10px}
-.info h2 .ic{width:34px;height:34px;border-radius:10px;background:var(--lavender);display:grid;place-items:center;color:var(--purple)}
+.info h2 .ic{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.85);box-shadow:0 4px 12px rgba(98,81,181,.15),inset 0 1px 0 #fff;display:grid;place-items:center;color:var(--purple)}
 .info h2 .ic svg{width:18px;height:18px}
 .info p{color:var(--ink-2);font-size:16px}
-.objective{border-left:5px solid var(--teal)}
+.objective{}
 
 /* Call card */
 .call{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:center;padding:14px;background:var(--navy);border-radius:var(--radius);color:#fff}
@@ -161,10 +166,10 @@ details.earlier .msgs{display:flex;flex-direction:column;gap:14px;padding-top:8p
 .choices fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;min-width:0}
 .choices legend{font-family:var(--f-head);font-weight:700;font-size:20px;margin-bottom:4px;padding:0}
 .choices .hint{font-size:14px;color:var(--ink-2);font-weight:500}
-.opt{position:relative;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:16px;border:2px solid #E3E6F0;background:#fff;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
+.opt{position:relative;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:18px;border:2px solid rgba(255,255,255,.95);background:rgba(255,255,255,.8);box-shadow:0 4px 14px rgba(98,81,181,.08);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
 .opt:hover{border-color:#B8ADEB;transform:translateY(-1px)}
 .opt input{position:absolute;opacity:0;width:1px;height:1px}
-.opt .oic{flex:none;width:44px;height:44px;border-radius:12px;background:var(--lavender);display:grid;place-items:center;color:var(--purple)}
+.opt .oic{flex:none;width:44px;height:44px;border-radius:12px;background:linear-gradient(150deg,#fff,var(--lavender));box-shadow:0 3px 10px rgba(98,81,181,.14);display:grid;place-items:center;color:var(--purple)}
 .opt .oic svg{width:22px;height:22px}
 .opt .txt{flex:1;font-size:17px}
 .opt .radio{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid #8C97AE;margin-top:10px;display:grid;place-items:center}
@@ -193,7 +198,7 @@ details.earlier .msgs{display:flex;flex-direction:column;gap:14px;padding-top:8p
 .board-art{display:flex;gap:18px;align-items:center}
 .board-art svg{flex:none;width:150px;height:auto}
 .legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.legend div{background:#fff;border-radius:14px;padding:12px 14px;font-size:14px;border-top:4px solid}
+.legend div{background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 4px 14px rgba(98,81,181,.08);border-radius:14px;padding:12px 14px;font-size:14px;border-top:4px solid}
 .legend b{display:block;font-size:15px}
 .legend .k{border-color:var(--teal)} .legend .a{border-color:var(--purple)} .legend .s{border-color:var(--ink-2)}
 .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -211,7 +216,7 @@ details.earlier .msgs{display:flex;flex-direction:column;gap:14px;padding-top:8p
 .verdict.ok{background:#E2F4F2;color:#00494C}
 .verdict.no{background:var(--lavender);color:#3B2F7A}
 .verdict b{display:block}
-.counter{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600}
+.counter{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.8);border:1px solid var(--line);font-size:14px;font-weight:600}
 .counter b{display:grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:var(--purple);color:#fff;font-size:13px}
 .summary-line{padding:16px 18px;border-radius:14px;background:var(--navy);color:#fff;font-weight:600}
 
@@ -238,7 +243,7 @@ details.earlier .msgs{display:flex;flex-direction:column;gap:14px;padding-top:8p
 .meter.l1 span:nth-child(-n+2){background:var(--purple)}
 .meter.l0 span:first-child{background:var(--ink-2)}
 .dim .ev-text{font-size:16px}
-.try{border-radius:12px;background:var(--cloud);padding:12px 14px;font-size:15px}
+.try{border-radius:12px;background:rgba(255,255,255,.7);padding:12px 14px;font-size:15px}
 .try b{display:block;color:var(--teal);font-size:13px;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
 .closing{text-align:center;padding:30px 22px;border-radius:var(--radius);background:var(--purple);color:#fff;display:flex;flex-direction:column;gap:18px;align-items:center}
 .closing p{font-family:var(--f-head);font-weight:700;font-size:clamp(20px,2.4vw,26px);max-width:30ch}
@@ -869,9 +874,9 @@ function renderBriefing(){
         <div class="who"><span class="avatar" aria-hidden="true"><img src="${MORGAN_IMG}" alt="" /></span><div><h2 id="pros-h">Morgan Lee</h2><p class="role">${t("b_role")}</p></div></div>
         <div class="co">${buildingSVG}<span>Northshore Services · ${t("b_co")}</span></div>
       </section>
-      <section class="card info"><h2><span class="ic">${ic.info}</span>${t("b_knowT")}</h2><p>${esc(t("b_know"))}</p></section>
-      <section class="card info objective"><h2><span class="ic">${ic.target}</span>${t("b_objT")}</h2><p>${t("b_obj")}</p></section>
-      <section class="card info"><h2><span class="ic">${ic.route}</span>${t("b_howT")}</h2><p>${t("b_how")}</p></section>
+      <section class="card info tint-lav"><h2><span class="ic">${ic.info}</span>${t("b_knowT")}</h2><p>${esc(t("b_know"))}</p></section>
+      <section class="card info objective tint-mint"><h2><span class="ic">${ic.target}</span>${t("b_objT")}</h2><p>${t("b_obj")}</p></section>
+      <section class="card info tint-blue"><h2><span class="ic">${ic.route}</span>${t("b_howT")}</h2><p>${t("b_how")}</p></section>
     </div>
     <div class="actions fade"><button type="button" class="btn btn-mint" data-act="join">${t("b_join")} ${ic.arrow}</button></div>`, false);
 }
@@ -916,7 +921,7 @@ function renderS3(){
       const ok = pick === st.expected;
       verdict = `<div class="verdict ${ok?"ok":"no"}">${ok?ic.check:ic.info}<div><b>${ok?t("matches"):t("pointsTo")(t("cat")[st.expected])}</b>${esc(t(st.why))}</div></div>`;
     }
-    return `<div class="card ev"><fieldset><legend><span class="sr-only">${ix+1}/7: </span>${esc(st.text)}</legend><div class="seg">${radios}</div></fieldset>${verdict}</div>`;
+    return `<div class="card ev ${["tint-lav","tint-mint","tint-blue"][ix%3]}"><fieldset><legend><span class="sr-only">${ix+1}/7: </span>${esc(st.text)}</legend><div class="seg">${radios}</div></fieldset>${verdict}</div>`;
   }).join("");
   const legend = `<div class="legend" aria-hidden="true">${["known","assumed","learn"].map((c,i)=>`<div class="${["k","a","s"][i]}"><b>${t("cat")[c]}</b>${t("catDesc")[c]}</div>`).join("")}</div>`;
   const legendSR = `<ul class="sr-only">${["known","assumed","learn"].map(c=>`<li>${t("cat")[c]}: ${t("catDesc")[c]}</li>`).join("")}</ul>`;
@@ -945,7 +950,7 @@ function renderS5(){
     `<span><i>02</i>${t("pathQs")}: ${S.asked.map(q=>D.pathQ[q]).join(", ")}</span>`,
     `<span><i>03</i>${t("pathBoard")(boardScore().matches)}</span>`,
     `<span><i>04</i>${D.pathS4[S.s4]}</span>`].join("");
-  const dims = r.map((d,i)=>`<section class="card dim" aria-labelledby="dim-${i}">
+  const dims = r.map((d,i)=>`<section class="card dim ${["tint-lav","tint-mint","tint-blue","tint-lav"][i]}" aria-labelledby="dim-${i}">
       <div class="dim-top"><h2 id="dim-${i}">${t("dims")[i]}</h2><span class="level l${d.lvl}">${lvlIcon[d.lvl]}${t("levels")[d.lvl]}</span></div>
       <div class="meter l${d.lvl}" aria-hidden="true"><span></span><span></span><span></span></div>
       <p class="ev-text">${esc(d.text)}</p>

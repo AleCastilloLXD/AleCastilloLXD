@@ -49,6 +49,37 @@ export const PROJECTS: Project[] = [
     detailImages: [],
   },
   {
+    id: 22,
+    title: "The Discovery Lab: From Feature Requests to Business Needs",
+    category: "Scenario-Based Learning",
+    year: "2026 · Fictional case",
+    description: "A branching discovery call where SaaS sellers practice asking better questions before recommending a solution. Bilingual, keyboard and screen-reader friendly.",
+    image: "/case-discovery-lab.svg",
+    imageAlt: "Cover of The Discovery Lab: an illustrated learning designer at a laptop surrounded by discovery icons, a question bubble and notes.",
+    role: "Learning strategy, scenario architecture, script (EN/ES), assessment rubric, UX direction and testing",
+    timeline: "Portfolio proof of concept",
+    tools: ["Branching scenario design", "Practice rubric", "HTML/CSS/JS", "AI-assisted coding", "WCAG 2.2 AA targets"],
+    overview: "A fictional, browser-native simulation for Account Executives and SDRs learning consultative discovery. A prospect asks for a reporting dashboard; the learner decides whether to demo, diagnose or qualify, and the prospect only reveals the real business problem when the learner asks the right questions.",
+    challenges: [
+      {
+        title: "The designed performance problem",
+        description: "Sellers can treat a feature request as the whole need and jump to a demo, missing the workflow pain, business impact and stakeholders behind it. This is a fictional case, not a claim about any employer or client."
+      },
+      {
+        title: "Assess judgment, not recall",
+        description: "Instead of a quiz, learners sort what they know from what they assume, then choose and justify a next step. The same choice is strong or weak depending on the evidence they uncovered."
+      }
+    ],
+    solution: "Six scenes, 8 to 10 minutes: a briefing, a branching conversation with recovery paths, an evidence board that reflects only what the prospect said, an evidence-aware next step and a debrief that quotes the learner's own choices. A Designer's notes toggle shows the reasoning behind each screen. English is the source language with a full Spanish localization.",
+    outcome: "Built as a working prototype with AI-assisted coding. Keyboard, reflow and contrast checks are done; screen-reader testing (NVDA and VoiceOver) and learner usability testing come next. Performance impact has not been measured.",
+    detailImages: [
+      "/discovery-lab-1.webp",
+      "/discovery-lab-2.webp",
+      "/discovery-lab-3.webp"
+    ],
+    link: { href: "/discovery-lab/", label: "Launch the simulation" },
+  },
+  {
     id: 17,
     title: "Product Training: eLab Analyzer",
     category: "Technical Training",
